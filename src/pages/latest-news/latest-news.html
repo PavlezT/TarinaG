@@ -1,0 +1,44 @@
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-row>
+      <ion-col left text-left>
+        <button ion-button icon-left clear>
+        <ion-icon name="ios-rainy-outline" class="weatherIcon"></ion-icon>
+        <div class="weatherText">13°</div>
+      </button>
+      </ion-col>
+      <ion-col center text-center>
+        <button ion-button icon-only clear>
+        <img src="assets/imgs/logo.png" height="32">
+      </button>
+      </ion-col>
+      <ion-col right text-right>
+        <button ion-button icon-right clear (click)="openSettings()">
+        <ion-icon name="ios-more-outline" class="moreIcon"></ion-icon>
+      </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <div class="globalFirstCard"></div>
+
+  <ion-card class="globalCard" *ngFor="let n of news" (click)="openNews(n)">
+    <ion-item>
+      <ion-icon item-start style="height: 25px; width: 25px; margin-left:6px;">
+        <img src="assets/imgs/{{n.icon}}.png">
+      </ion-icon>
+      <h3>{{n.date}}</h3>
+      <p>{{n.text}}</p>
+      <p><b>Read more...</b></p>      
+    </ion-item>
+  </ion-card>
+
+</ion-content>

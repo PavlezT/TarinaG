@@ -1,0 +1,70 @@
+<ion-header>
+
+  <div class="globalHeader">
+    <ion-row>
+      <ion-col left text-left>
+        <button ion-button icon-left clear>
+        <ion-icon name="ios-rainy-outline" class="weatherIcon"></ion-icon>
+        <div class="weatherText">13°</div>
+      </button>
+      </ion-col>
+      <ion-col center text-center>
+        <button ion-button icon-only clear>
+        <img src="assets/imgs/logo.png" height="32">
+      </button>
+      </ion-col>
+      <ion-col right text-right>
+        <button ion-button icon-right clear>
+        <ion-icon name="ios-more-outline" class="moreIcon"></ion-icon>
+      </button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="globalBackground">
+
+  <ion-card class="globalCard2">
+    <ion-list-header class="globalListHeading">
+      General Settings
+    </ion-list-header>
+    <button ion-item (click)="openNotificationSettings()">
+      <ion-icon color="secondary" name="md-globe" item-start></ion-icon>
+      Notifications
+    </button>
+    <ion-item>
+      <ion-icon color="secondary" name="md-list" item-start></ion-icon>
+      <ion-label>Show Menu Always</ion-label>
+      <ion-toggle color="secondary" checked="true" item-end></ion-toggle>
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="globalCard2">
+    <ion-list-header class="globalListHeading">
+      Account Settings
+    </ion-list-header>
+    <button ion-item *ngFor="let a of accounts" (click)="openAccountSettings(a)">
+      <ion-icon item-start style="height: 25px; width: 25px">
+        <img src="assets/imgs/{{a.icon}}.png">
+      </ion-icon>
+      {{ a.name }}
+    </button>
+  </ion-card>
+
+  <ion-card class="globalCard2">
+    <ion-list-header class="globalListHeading">
+      Help
+    </ion-list-header>
+    <button ion-item *ngFor="let h of helps" (click)="openHelpItem(h)">
+      <ion-icon color="secondary" name={{h.icon}} item-start></ion-icon>
+      {{ h.name }}
+    </button>
+  </ion-card>
+
+</ion-content>

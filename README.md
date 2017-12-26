@@ -1,0 +1,1 @@
+This is a ionic 3 mobile app for Tarina Golf

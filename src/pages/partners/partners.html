@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-row>
+      <ion-col left text-left>
+        <button ion-button icon-left clear>
+        <ion-icon name="ios-rainy-outline" class="weatherIcon"></ion-icon>
+        <div class="weatherText">13°</div>
+      </button>
+      </ion-col>
+      <ion-col center text-center>
+        <button ion-button icon-only clear>
+        <img src="assets/imgs/logo.png" height="32">
+      </button>
+      </ion-col>
+      <ion-col right text-right>
+        <button ion-button icon-right clear (click)="openSettings()">
+        <ion-icon name="ios-more-outline" class="moreIcon"></ion-icon>
+      </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-segment [(ngModel)]="partners">
+      <ion-segment-button value="Vanha">
+        Vanha Tarina
+      </ion-segment-button>
+      <ion-segment-button value="Uusi">
+        Uusi Tarina
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-list *ngIf="partners == 'Vanha'">
+    </ion-list>
+
+    <ion-list *ngIf="partners == 'Uusi'">
+    </ion-list>
+
+</ion-content>

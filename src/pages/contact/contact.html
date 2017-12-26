@@ -1,0 +1,62 @@
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-row>
+      <ion-col left text-left>
+        <button ion-button icon-left clear>
+        <ion-icon name="ios-rainy-outline" class="weatherIcon"></ion-icon>
+        <div class="weatherText">13°</div>
+      </button>
+      </ion-col>
+      <ion-col center text-center>
+        <button ion-button icon-only clear>
+        <img src="assets/imgs/logo.png" height="32">
+      </button>
+      </ion-col>
+      <ion-col right text-right>
+        <button ion-button icon-right clear (click)="openSettings()">
+        <ion-icon name="ios-more-outline" class="moreIcon"></ion-icon>
+      </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <div style="font-size:12px">
+
+    TarinaGolf ry ja Tarinaharjun Golf Oy<br><br><br>
+
+    <div *ngFor="let d of details">
+      <b>{{d.heading}}</b><br>
+      {{d.content}}<br><br><br>
+    </div>
+
+    <b>Puhelinnumerot</b>
+    <ion-row>
+      <ion-col text-left>
+        Ajanvaraus<br> Toimisto
+        <br> Palvelupäällikkö
+        <br> Toimitusjohtaja
+        <br> Valvojat
+        <br> Ravintola
+        <br> Kenttämestari
+        <br> Kilpailunjohtaja
+        <br> KauppaTarina
+      </ion-col>
+      <ion-col text-left>
+        Caddiemasterit<br> Maarit Jokiniemi<br> Riitta Tuunainen<br> Osmo Ruuska<br> Vuorossa oleva<br> Kimberly Hoppes<br>        Pasi Sallinen<br> Kilpailun mukaan<br> Pete Partanen
+      </ion-col>
+      <ion-col text-right>
+        020 187 8700<br> 020 187 8702<br> 020 187 8706<br> 020 187 8710<br> 020 187 8704<br> 040 0353 067<br> 020 187 8709<br>        020 187 8705<br> 044 777 3606
+      </ion-col>
+    </ion-row>
+    
+    <br>
+    <br>
+    <div>Puhelun hinta sekä kiinteästä-, että matkapuhelimesta soitettaessa: 8,35 snt/puh + 16,69 snt/min</div>
+  </div>
+</ion-content>
