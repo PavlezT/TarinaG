@@ -2,6 +2,9 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { GeneralService } from '../utils/service';
+import { Toast } from '../utils/toast';
+import { HttpModule } from '@angular/http';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -18,6 +21,7 @@ import { SettingsPage } from '../pages/settings/settings';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -56,8 +61,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SettingsPage
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
+    StatusBar,InAppBrowser,
+    SplashScreen,GeneralService,Toast,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

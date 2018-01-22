@@ -16,6 +16,11 @@
 
   <ion-card class="globalCard2">
 
+    <ion-item *ngFor="let site of Sites">
+      <ion-label>{{site.name}}</ion-label>
+      <ion-toggle color="secondary" checked="true" item-end></ion-toggle>
+    </ion-item>
+
     <ion-item>
       <ion-label>Website</ion-label>
       <ion-toggle color="secondary" checked="true" item-end></ion-toggle>

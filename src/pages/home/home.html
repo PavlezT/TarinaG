@@ -28,14 +28,14 @@
 <ion-content>
 
   <div class="globalFirstCard"></div>
-
-  <ion-card class="globalCard" *ngFor="let s of services" (click)="openService(s)">
-    <ion-item>
+  <div class="spinner"><ion-spinner *ngIf="!services"></ion-spinner></div>
+  <ion-card class="globalCard" *ngFor="let s of services" (click)="openService(s)" [ngStyle]="s.style">
+    <ion-item [ngStyle]="s.style">
       <ion-avatar item-start>
-        <img src="assets/imgs/{{s.icon}}.png">
+        <img src="{{service.serverAPIUrl+s.logourl}}" >
       </ion-avatar>
-      <h2>{{s.name}}</h2>
-      <ion-icon *ngIf="s.notification" class="notificationIcon" color="secondary" item-right name="ios-alert-outline"></ion-icon>
+      <h2>{{s.text}}</h2>
+      <ion-icon *ngIf="s.notificationid" class="notificationIcon" color="secondary" item-right name="ios-alert-outline"></ion-icon>
     </ion-item>
   </ion-card>
 
