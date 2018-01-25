@@ -44,22 +44,26 @@ export class HomePage {
         pageName: s.name
       });
     } else {
-      const browser = this.iab.create(s.Notifications.link,'_blank',{
+      const browser = this.iab.create(s.link,'_blank',{
         location : 'no',
         zoom : 'no'
       });
       browser.hide();
       this.showLoader();
+      try{
+        browser.on('loadstop').subscribe((type)=>{
+          browser.show();
+          this.loader.dismissAll();
+        })
 
-      browser.on('loadstop').subscribe((type)=>{
-        browser.show();
+        browser.on('loaderror').subscribe((type) => {
+          this.toast.showToast('Error occur while loading page.');
+          this.loader.dismissAll();
+        })
+      }catch(e){
+        console.log('Run in browser');
         this.loader.dismissAll();
-      })
-
-      browser.on('loaderror').subscribe((type) => {
-        this.toast.showToast('Error occur while loading page.');
-        this.loader.dismissAll();
-      })
+      }
     }
   }
 
@@ -94,6 +98,14 @@ export class HomePage {
         
           return button;
         })
+
+        this.services.sort((a:any,b:any)=>{
+          if(parseInt(a.order) > parseInt(b.order))
+            return 1;
+          return -1;
+        })
+
+        this.service.Sites = this.services;
       })
       .catch(error => {
         this.services = [];

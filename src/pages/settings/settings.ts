@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { AboutPage } from '../about/about';
 import { AccountsPage } from '../accounts/accounts';
 import { FeedbackPage } from '../feedback/feedback';
 import { NotificationsPage } from '../notifications/notifications';
+import { GeneralService } from '../../utils/service';
 
 @Component({
   selector: 'page-settings',
@@ -15,7 +16,7 @@ export class SettingsPage {
   accounts: Array<{ name: string, icon: string, component: any }>;
   helps: Array<{ name: string, icon: string, component: any }>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, @Inject(GeneralService) public service : GeneralService) {
     this.setAccountItems();
     this.setHelpItems();
   }

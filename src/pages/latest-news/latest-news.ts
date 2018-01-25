@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { SettingsPage } from '../settings/settings';
+import { GeneralService } from '../../utils/service';
 
 @Component({
   selector: 'page-latest-news',
@@ -11,7 +12,7 @@ export class LatestNewsPage {
 
   news: Array<{ date: string, icon: string, text: string }>;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, @Inject(GeneralService) public service : GeneralService) {
     this.getNews();
   }
 

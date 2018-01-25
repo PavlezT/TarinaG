@@ -9,10 +9,50 @@ export class GeneralService {
     serverAPIUrl: string;
     user: any;
     userGot: boolean;
+    logo : string;
+    app : any;
+    temperature : number;
+    weather : string;
+    Sites : any;
 
     constructor (private  http: Http) {
         this.serverAPIUrl = consts.siteUrl;
         this.user = null;
+        this.logo = 'assets/imgs/logo.gif';
+        this.app = {};
+        this.temperature = 0;
+        this.weather = `/assets/imgs/weather/02d.png`;
+        this.Sites = [];
+
+        this.loadApp()
+            .then(() => {
+                return this.getWeather(this.app.latitude,this.app.longitude);
+            })
+            .then((data) => {
+                data = data.json();
+                this.weather = `/assets/imgs/weather/${data.weather[0].icon}.png`;
+                this.temperature = data.main.temp;
+            })
+            .catch(error=>{
+                console.error('<Get Weather> error:',error);
+            })
+    }
+
+    public loadApp() : Promise<any>{
+        return this.get(`_api/Apps/id/${consts.appid}`)
+            .then(data=>{
+                this.app = data.json()[0];
+                this.logo = this.serverAPIUrl+this.app.logourl;
+                return this.app.logourl;
+            })
+            .catch(error=>{
+                console.error('<Error occur> loading app');
+            })
+    }
+
+    public getWeather(latitude,longitude) : Promise<any>{
+        let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${consts.weatherApiKey}&units=metric`;
+        return this.http.get(url).toPromise();
     }
 
     public get (queryUrl: string) {
@@ -20,7 +60,7 @@ export class GeneralService {
         return this.httpGet(queryUrl);
     }
 
-    public httpGet(queryUrl: string){
+    private httpGet(queryUrl: string) : Promise<any>{
         let headers = new Headers();
         headers.append('Accept', 'application/json;odata=verbose');
         headers.append('Content-Type', 'application/json;odata=verbose');
@@ -35,12 +75,12 @@ export class GeneralService {
             // });
     }
 
-    public post (queryUrl : string, object : Object) {
+    public post (queryUrl : string, object : Object) : Promise<any> {
         queryUrl = this.serverAPIUrl + queryUrl;
         return this.httpsPost(queryUrl, object);
     }
 
-    public httpsPost (queryUrl: string, object: Object) {
+    private httpsPost (queryUrl: string, object: Object)  : Promise<any>{
         let headers = new Headers();
         headers.append('Accept', 'application/json;odata=verbose');
         headers.append('Content-Type', 'application/json;odata=verbose');

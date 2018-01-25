@@ -5,13 +5,13 @@
     <ion-row>
       <ion-col left text-left>
         <button ion-button icon-left clear>
-        <ion-icon name="ios-rainy-outline" class="weatherIcon"></ion-icon>
-        <div class="weatherText">13°</div>
+          <img class="weather_icon" [src]="service.weather" />
+        <div class="weatherText">{{service.temperature}}°</div>
       </button>
       </ion-col>
       <ion-col center text-center>
         <button ion-button icon-only clear>
-        <img src="assets/imgs/logo.png" height="32">
+        <img class="applogo" [src]="service.logo"  >
       </button>
       </ion-col>
       <ion-col right text-right>

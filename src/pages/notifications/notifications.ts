@@ -11,15 +11,8 @@ export class NotificationsPage {
   Sites : any;
 
   constructor(public navCtrl: NavController, @Inject(GeneralService) public service : GeneralService, public navParams: NavParams, public viewCtrl: ViewController) {
-    this.Sites = [];
+    this.Sites = service.Sites;
 
-    this.Sites = [
-      {
-        icon : 'https://sasd',
-        name : 'Website',
-        link : 'https://asdas'
-      }
-    ]
   }
 
   dismissView() {
@@ -27,19 +20,19 @@ export class NotificationsPage {
   }
 
   ionViewDidEnter(){
-    this.getSites();
+    // this.getSites();
   }
 
-  public getSites() : Promise<any> {
-    return Promise.resolve();
-    // let url = `ewewewe`;
-    // return this.service.get(url)
-    //   .then( res => {
-    //     // this.Sites = res.json();
-    //   })
-    //   .catch(error => {
-    //     this.Sites = [];
-    //   })
-  }
+  // public getSites() : Promise<any> {
+  //   return Promise.resolve();
+  //   // let url = `ewewewe`;
+  //   // return this.service.get(url)
+  //   //   .then( res => {
+  //   //     // this.Sites = res.json();
+  //   //   })
+  //   //   .catch(error => {
+  //   //     this.Sites = [];
+  //   //   })
+  // }
 
 }

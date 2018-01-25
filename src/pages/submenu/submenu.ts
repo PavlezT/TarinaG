@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { SettingsPage } from '../settings/settings';
+import { GeneralService } from '../../utils/service';
 
 @Component({
   selector: 'page-submenu',
@@ -12,7 +13,7 @@ export class SubmenuPage {
   pageTitle: string = '';
   services: Array<{ name: string, icon: string, notification: boolean, component: any }>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, @Inject(GeneralService) public service : GeneralService) {
     this.pageTitle = this.navParams.get('pageName');
     this.setServices();
   }
