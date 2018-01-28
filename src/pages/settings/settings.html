@@ -22,7 +22,7 @@
   </div>
 
   <ion-navbar>
-    <ion-title>Settings</ion-title>
+    <ion-title>{{service.dic.Settings}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -32,17 +32,17 @@
 
   <ion-card class="globalCard2">
     <ion-list-header class="globalListHeading">
-      General Settings
+      {{service.dic.GenSettings}}
     </ion-list-header>
     <button ion-item (click)="openNotificationSettings()">
       <ion-icon color="secondary" name="md-globe" item-start></ion-icon>
-      Notifications
+      {{service.dic.Notifications}}
     </button>
-    <ion-item>
+    <!-- <ion-item>
       <ion-icon color="secondary" name="md-list" item-start></ion-icon>
       <ion-label>Show Menu Always</ion-label>
       <ion-toggle color="secondary" checked="true" item-end></ion-toggle>
-    </ion-item>
+    </ion-item> -->
   </ion-card>
 
   <!-- <ion-card class="globalCard2">
@@ -59,7 +59,7 @@
 
   <ion-card class="globalCard2">
     <ion-list-header class="globalListHeading">
-      Help
+      {{service.dic.Help}}
     </ion-list-header>
     <button ion-item *ngFor="let h of helps" (click)="openHelpItem(h)">
       <ion-icon color="secondary" name={{h.icon}} item-start></ion-icon>

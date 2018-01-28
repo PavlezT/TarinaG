@@ -46,9 +46,10 @@ export class HomePage {
     } else {
       const browser = this.iab.create(s.link,'_blank',{
         location : 'no',
-        zoom : 'no'
+        zoom : 'no',
+        hidden : 'yes'
       });
-      browser.hide();
+      // browser.hide(); 
       this.showLoader();
       try{
         browser.on('loadstop').subscribe((type)=>{
@@ -65,6 +66,8 @@ export class HomePage {
         this.loader.dismissAll();
       }
     }
+
+    this.toast.showToast('locale:' + this.service.locale);
   }
 
   openSettings(){

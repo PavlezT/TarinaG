@@ -33,8 +33,8 @@ export class SettingsPage {
 
   setHelpItems() {
     this.helps = [
-      { name: 'Give Feedback', icon: 'md-star', component: FeedbackPage },
-      { name: 'About', icon: 'md-help-circle', component: AboutPage }
+      { name: this.service.dic.Givefeedback, icon: 'md-star', component: FeedbackPage },
+      { name: this.service.dic.About, icon: 'md-help-circle', component: AboutPage }
     ]
   }
 

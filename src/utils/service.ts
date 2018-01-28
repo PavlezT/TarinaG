@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { Platform } from 'ionic-angular';
 
 import * as consts from './consts';
+import * as transen from '../assets/dictionary/en';
+import * as transfi from '../assets/dictionary/fi';
 
 @Injectable()
 export class GeneralService {
@@ -13,29 +16,41 @@ export class GeneralService {
     app : any;
     temperature : number;
     weather : string;
+    dic : any;
+    locale : string;
     Sites : any;
 
-    constructor (private  http: Http) {
+    constructor (private  http: Http,public plt: Platform) {
         this.serverAPIUrl = consts.siteUrl;
         this.user = null;
         this.logo = 'assets/imgs/logo.gif';
         this.app = {};
         this.temperature = 0;
-        this.weather = `/assets/imgs/weather/02d.png`;
+        this.weather = `assets/imgs/weather/02d.png`;
         this.Sites = [];
+        this.dic = {};
+        this.locale = navigator.language || 'en';
 
+        this.getDic();
         this.loadApp()
             .then(() => {
                 return this.getWeather(this.app.latitude,this.app.longitude);
             })
             .then((data) => {
                 data = data.json();
-                this.weather = `/assets/imgs/weather/${data.weather[0].icon}.png`;
-                this.temperature = data.main.temp;
+                this.weather = `assets/imgs/weather/${data.weather[0].icon}.png`;
+                this.temperature = parseInt(data.main.temp);
             })
             .catch(error=>{
                 console.error('<Get Weather> error:',error);
             })
+    }
+
+    public getDic() : void {
+        if( this.locale.toLowerCase().includes('fi') )
+            this.dic = transfi.fi;
+        else 
+            this.dic = transen.en;
     }
 
     public loadApp() : Promise<any>{

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { GeneralService } from '../../utils/service';
 
 @Component({
   selector: 'page-feedback',
@@ -7,7 +8,8 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 })
 export class FeedbackPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
+    @Inject(GeneralService) public service : GeneralService) {
   }
 
   dismissView() {
