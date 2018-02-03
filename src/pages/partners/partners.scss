@@ -8,4 +8,14 @@ page-partners {
     .moreIcon {
         font-size:40px;
     } 
+
+    .spinner{
+        width: 100%;
+        position: relative;
+        margin: auto;
+        ion-spinner {
+            margin: auto;
+            position: absolute;
+        }
+    }
 }

@@ -22,6 +22,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     SettingsPage
   ],
   providers: [
-    StatusBar,InAppBrowser,
+    StatusBar,InAppBrowser,NativeStorage,
     SplashScreen,GeneralService,Toast,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

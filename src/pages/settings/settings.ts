@@ -23,10 +23,10 @@ export class SettingsPage {
 
   setAccountItems() {
     this.accounts = [
-      { name: 'Facebook', icon: 'fblogo', component: AccountsPage },
-      { name: 'Instagram', icon: 'instalogo', component: AccountsPage },
-      { name: 'Twitter', icon: 'twitterlogo', component: AccountsPage },
-      { name: 'YouTube', icon: 'youtubelogo', component: AccountsPage },
+      // { name: 'Facebook', icon: 'fblogo', component: AccountsPage },
+      // { name: 'Instagram', icon: 'instalogo', component: AccountsPage },
+      // { name: 'Twitter', icon: 'twitterlogo', component: AccountsPage },
+      // { name: 'YouTube', icon: 'youtubelogo', component: AccountsPage },
       { name: 'NexGolf', icon: 'nglogo', component: AccountsPage }
     ]
   }

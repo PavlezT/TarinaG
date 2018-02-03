@@ -20,6 +20,8 @@ export class GeneralService {
     locale : string;
     Sites : any;
 
+    getApp : Promise<any>;
+
     constructor (private  http: Http,public plt: Platform) {
         this.serverAPIUrl = consts.siteUrl;
         this.user = null;
@@ -32,7 +34,7 @@ export class GeneralService {
         this.locale = navigator.language || 'en';
 
         this.getDic();
-        this.loadApp()
+        this.getApp = this.loadApp()
             .then(() => {
                 return this.getWeather(this.app.latitude,this.app.longitude);
             })
@@ -53,7 +55,7 @@ export class GeneralService {
             this.dic = transen.en;
     }
 
-    public loadApp() : Promise<any>{
+    public loadApp() : Promise<any> {
         return this.get(`_api/Apps/id/${consts.appid}`)
             .then(data=>{
                 this.app = data.json()[0];
@@ -75,7 +77,7 @@ export class GeneralService {
         return this.httpGet(queryUrl);
     }
 
-    private httpGet(queryUrl: string) : Promise<any>{
+    public httpGet(queryUrl: string) : Promise<any>{
         let headers = new Headers();
         headers.append('Accept', 'application/json;odata=verbose');
         headers.append('Content-Type', 'application/json;odata=verbose');
@@ -92,10 +94,10 @@ export class GeneralService {
 
     public post (queryUrl : string, object : Object) : Promise<any> {
         queryUrl = this.serverAPIUrl + queryUrl;
-        return this.httpsPost(queryUrl, object);
+        return this.httpPost(queryUrl, object);
     }
 
-    private httpsPost (queryUrl: string, object: Object)  : Promise<any>{
+    public httpPost (queryUrl: string, object: Object)  : Promise<any>{
         let headers = new Headers();
         headers.append('Accept', 'application/json;odata=verbose');
         headers.append('Content-Type', 'application/json;odata=verbose');

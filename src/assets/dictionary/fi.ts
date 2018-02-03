@@ -25,5 +25,8 @@ export var fi = {
     "About" : "Tietoja ohjelmasta",
     "ReadMore" : "Lue lisдд...",
     "ShowMore" : "Nдytд lisдд...",
-    "Help" : "Auta"
+    "Help" : "Auta",
+    "Username" : "Jäsennumero",
+    "Password" : "Salasana",
+    "Login" : 'Kirjaudu'
 }

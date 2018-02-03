@@ -27,20 +27,28 @@
 
 
 <ion-content padding>
+    <div class="spinner"><ion-spinner *ngIf="!Tabs"></ion-spinner></div>
 
-    <ion-segment [(ngModel)]="partners">
-      <ion-segment-button value="Vanha">
-        Vanha Tarina
-      </ion-segment-button>
-      <ion-segment-button value="Uusi">
-        Uusi Tarina
+    <ion-segment [(ngModel)]="selectedTab">
+      <ion-segment-button *ngFor="let tab of Tabs" value="{{tab.id}}" (tap)="selectTab(tab)">
+        {{tab.name}}
       </ion-segment-button>
     </ion-segment>
 
-    <ion-list *ngIf="partners == 'Vanha'">
-    </ion-list>
+    <ng-container *ngFor="let tab of Tabs">
+      <ion-list *ngIf="tab.id == selectedTab" >
+        <ng-container *ngFor="let icon of Icons" >
+          <ion-item *ngIf="icon.tabid == tab.id" >
+            {{icon.logourl}}
+            <p>{{icon.name}}</p>
+          </ion-item>
+        </ng-container>
+      </ion-list >
+    </ng-container>
+    <!-- <ion-list *ngIf="selectedTab == 'Vanha'">
+    </ion-list> -->
 
-    <ion-list *ngIf="partners == 'Uusi'">
-    </ion-list>
+    <!-- <ion-list *ngIf="selectedTab == 'Uusi'">
+    </ion-list> -->
 
 </ion-content>

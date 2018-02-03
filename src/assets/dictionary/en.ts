@@ -25,5 +25,8 @@ export var en={
     "About" : "About",
     "ReadMore" : "Read More...",
     "ShowMore" : "Show more...",
-    "Help" : "Help"
+    "Help" : "Help",
+    "Username" : "Username",
+    "Password" : "Password",
+    "Login" : 'Login'
 }
