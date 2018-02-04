@@ -86,7 +86,7 @@ export class PartnersPage {
 
   public showLoader() : Promise<any> {
     this.loader = this.loadingCtrl.create({
-      content: 'Wait',
+      content: '',
     });
 
     return this.loader.present();
