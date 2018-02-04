@@ -75,7 +75,11 @@ export class HomePage {
   }
 
   ionViewDidEnter(){
-    this.getSites();
+    this.service.getApp
+      .then(()=>{
+        this.getSites();
+      })
+    
   }
 
   public showLoader() : Promise<any> {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Platform } from 'ionic-angular';
+import { AppVersion } from '@ionic-native/app-version';
 
 import * as consts from './consts';
 import * as transen from '../assets/dictionary/en';
@@ -22,7 +23,7 @@ export class GeneralService {
 
     getApp : Promise<any>;
 
-    constructor (private  http: Http,public plt: Platform) {
+    constructor (private  http: Http,public plt: Platform,private appVersion: AppVersion) {
         this.serverAPIUrl = consts.siteUrl;
         this.user = null;
         this.logo = 'assets/imgs/logo.gif';
@@ -34,8 +35,16 @@ export class GeneralService {
         this.locale = navigator.language || 'en';
 
         this.getDic();
-        this.getApp = this.loadApp()
+        this.getApp = this.appVersion.getPackageName()
+            .catch(error=>{
+                console.log('App version in browser');
+                return 'club.golf.app';
+            })
+            .then( appname => {
+                return this.loadApp(appname);
+            })        
             .then(() => {
+                consts.setAppId(this.app.id);
                 return this.getWeather(this.app.latitude,this.app.longitude);
             })
             .then((data) => {
@@ -45,7 +54,7 @@ export class GeneralService {
             })
             .catch(error=>{
                 console.error('<Get Weather> error:',error);
-            })
+            });
     }
 
     public getDic() : void {
@@ -55,8 +64,8 @@ export class GeneralService {
             this.dic = transen.en;
     }
 
-    public loadApp() : Promise<any> {
-        return this.get(`_api/Apps/id/${consts.appid}`)
+    public loadApp(app_name) : Promise<any> {
+        return this.get(`_api/Apps/app_name/${app_name}`)
             .then(data=>{
                 this.app = data.json()[0];
                 this.logo = this.serverAPIUrl+this.app.logourl;

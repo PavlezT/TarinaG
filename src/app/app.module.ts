@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { GeneralService } from '../utils/service';
 import { Toast } from '../utils/toast';
 import { HttpModule } from '@angular/http';
+import { AppVersion } from '@ionic-native/app-version';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -63,7 +64,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
   ],
   providers: [
     StatusBar,InAppBrowser,NativeStorage,
-    SplashScreen,GeneralService,Toast,
+    SplashScreen,GeneralService,Toast,AppVersion,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

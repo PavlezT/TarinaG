@@ -30,7 +30,7 @@ export class TeeTimesPage {
   public loadHref() : Promise<any> {
     return this.service.getApp
       .then(()=>{
-        this.teetimes_href =  this.sanitizer.bypassSecurityTrustResourceUrl(this.service.app.teetimes_href.toString());
+        this.teetimes_href =  this.sanitizer.bypassSecurityTrustResourceUrl(this.service.app.teetimes_href);
       })
   }
 
