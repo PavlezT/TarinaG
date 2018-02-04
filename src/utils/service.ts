@@ -68,7 +68,7 @@ export class GeneralService {
     }
 
     public getWeather(latitude,longitude) : Promise<any>{
-        let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${consts.weatherApiKey}&units=metric`;
+        let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${this.app.weather_apikey}&units=metric`;
         return this.http.get(url).toPromise();
     }
 

@@ -38,17 +38,11 @@
     <ng-container *ngFor="let tab of Tabs">
       <ion-list *ngIf="tab.id == selectedTab" >
         <ng-container *ngFor="let icon of Icons" >
-          <ion-item *ngIf="icon.tabid == tab.id" >
-            {{icon.logourl}}
-            <p>{{icon.name}}</p>
-          </ion-item>
+          <div class="partner-logo" *ngIf="icon.tabid == tab.id" (tap)="openLink(icon)" >
+            <img src="{{service.serverAPIUrl+icon.logourl}}" />
+          </div>
         </ng-container>
       </ion-list >
     </ng-container>
-    <!-- <ion-list *ngIf="selectedTab == 'Vanha'">
-    </ion-list> -->
-
-    <!-- <ion-list *ngIf="selectedTab == 'Uusi'">
-    </ion-list> -->
 
 </ion-content>

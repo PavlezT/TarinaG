@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { LoadingController, Loading } from 'ionic-angular';
 
 import { SettingsPage } from '../settings/settings';
 import { GeneralService } from '../../utils/service';
@@ -13,8 +15,10 @@ export class PartnersPage {
   Tabs : Array<any>;
   Icons : Array<any>;
   selectedTab : any;
+  loader : Loading;
 
-  constructor(public navCtrl: NavController, @Inject(GeneralService) public service : GeneralService) {
+  constructor(public navCtrl: NavController, @Inject(GeneralService) public service : GeneralService,
+    private iab: InAppBrowser, public loadingCtrl: LoadingController) {
     this.service.getApp
       .then(()=>{
         return Promise.all([this.getTabs(),this.getIcons()]);
@@ -54,6 +58,38 @@ export class PartnersPage {
         console.error('<Get Icons> error:', error);
         this.Icons = [];
       })
+  }
+
+  public openLink(icon) : void {
+    const browser = this.iab.create(icon.href,'_blank',{
+      location : 'no',
+      zoom : 'no',
+      hidden : 'yes'
+    });
+    
+    this.showLoader();
+    try{
+      browser.on('loadstop').subscribe((type)=>{
+        browser.show();
+        this.loader.dismiss();
+      })
+
+      browser.on('loaderror').subscribe((type) => {
+        this.loader.dismiss();
+      })
+    }catch(e){
+      console.log('Run in browser');
+      this.loader.dismiss();
+    }
+
+  }
+
+  public showLoader() : Promise<any> {
+    this.loader = this.loadingCtrl.create({
+      content: 'Wait',
+    });
+
+    return this.loader.present();
   }
 
   public selectTab(tab){

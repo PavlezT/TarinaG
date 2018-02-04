@@ -54,16 +54,16 @@ export class HomePage {
       try{
         browser.on('loadstop').subscribe((type)=>{
           browser.show();
-          this.loader.dismissAll();
+          this.loader.dismiss();
         })
 
         browser.on('loaderror').subscribe((type) => {
           this.toast.showToast('Error occur while loading page.');
-          this.loader.dismissAll();
+          this.loader.dismiss();
         })
       }catch(e){
         console.log('Run in browser');
-        this.loader.dismissAll();
+        this.loader.dismiss();
       }
     }
 
