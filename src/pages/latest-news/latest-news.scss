@@ -8,4 +8,20 @@ page-latest-news {
     .moreIcon {
         font-size:40px;
     } 
+
+    .globalCard{
+        ion-label{
+            white-space: normal;
+        }
+    }
+
+    .spinner{
+        width: 100%;
+        position: relative;
+        margin: auto;
+        ion-spinner {
+            margin: auto;
+            position: absolute;
+        }
+    }
 }

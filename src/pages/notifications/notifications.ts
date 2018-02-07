@@ -11,8 +11,9 @@ export class NotificationsPage {
   Sites : any;
 
   constructor(public navCtrl: NavController, @Inject(GeneralService) public service : GeneralService, public navParams: NavParams, public viewCtrl: ViewController) {
-    this.Sites = service.Sites;
-
+    this.service.Sites.then(sites => {
+      this.Sites = sites;
+    });
   }
 
   dismissView() {
@@ -20,19 +21,7 @@ export class NotificationsPage {
   }
 
   ionViewDidEnter(){
-    // this.getSites();
+    
   }
-
-  // public getSites() : Promise<any> {
-  //   return Promise.resolve();
-  //   // let url = `ewewewe`;
-  //   // return this.service.get(url)
-  //   //   .then( res => {
-  //   //     // this.Sites = res.json();
-  //   //   })
-  //   //   .catch(error => {
-  //   //     this.Sites = [];
-  //   //   })
-  // }
 
 }

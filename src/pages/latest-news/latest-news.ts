@@ -13,19 +13,42 @@ export class LatestNewsPage {
   news: Array<{ date: string, icon: string, text: string }>;
 
   constructor(public navCtrl: NavController, @Inject(GeneralService) public service : GeneralService) {
-    this.getNews();
+    
   }
 
-  getNews() {
-    this.news = [
-      { date: '27.7.2017 17:09', text: 'Mikko pelaa huomenna mitalipeleissä. Isot Tsempit.', icon: 'fblogo' },
-      { date: '27.7.2017 15:23', text: 'Klubiravintola Neliapila: ALKUVIIKON MENU 31.8.-4.8. ', icon: 'aslogo' },
-      { date: '27.7.2017 13:19', text: '@lateruuska on Suomen mestari jälleen...', icon: 'instalogo' },
-      { date: '26.7.2017 07:32', text: 'HUOMIO! Alkukaudesta Vanhan Tarinan väylillä 14 ja 15 tavattu...', icon: 'dmlogo' },
-      { date: '20.7.2017 19:02', text: '@GoGolffi Lauri Ruuska lähtee lyömään yhdellä päälle...', icon: 'twitterlogo' },
-      { date: '17.7.2017 02:09', text: 'TarinaBattlessä savolaiset huippuseurat KalPan, KuPsin ja...', icon: 'youtubelogo' },
-      { date: '12.7.2017 21:26', text: 'Tulokset: Naisten Yara-sunnuntai with Daily Sports (A) Uusi Tarina...', icon: 'nglogo' }
-    ]
+  ionViewDidEnter(){
+    this.service.getApp
+      .then(()=>{
+        this.service.Sites.then((sites)=>{
+          this.getNews(sites);
+        })
+      })
+  };
+
+
+  getNews(sites : Array<any> ) : Promise<any> {
+    let notifications = {};
+    this.news = [];
+    
+    sites.map(but=>{
+      if(but && but.notificationid && !notifications[but.notificationid] ){
+        notifications[but.notificationid] = but.logourl;
+      }
+    });
+
+    let url = `_api/Notifications`;
+    return this.service.get(url)
+      .then( res => {
+        res.json().map(notif => {
+          if( notifications[notif.id.toString()] && notif.date ){
+            notif.date = notif.date ? (new Date(notif.date)).toLocaleString() : '';
+            notif.logourl = this.service.serverAPIUrl+notifications[notif.id.toString()] || '/assets/imgs/logo.gif' ;
+            notif.content = notif.content.replace(/<a/g,'<p').replace(/<\/a/g,'</p');
+            this.news.push(notif);
+          }
+        });
+
+      });
   }
 
   openNews(n) {

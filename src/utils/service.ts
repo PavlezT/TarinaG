@@ -7,6 +7,7 @@ import { AppVersion } from '@ionic-native/app-version';
 import * as consts from './consts';
 import * as transen from '../assets/dictionary/en';
 import * as transfi from '../assets/dictionary/fi';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class GeneralService {
@@ -19,7 +20,7 @@ export class GeneralService {
     weather : string;
     dic : any;
     locale : string;
-    Sites : any;
+    Sites : Promise<Array<any>>;//Observable<any>;
 
     getApp : Promise<any>;
 
@@ -30,7 +31,6 @@ export class GeneralService {
         this.app = {};
         this.temperature = 0;
         this.weather = `assets/imgs/weather/02d.png`;
-        this.Sites = [];
         this.dic = {};
         this.locale = navigator.language || 'en';
 
@@ -55,6 +55,45 @@ export class GeneralService {
             .catch(error=>{
                 console.error('<Get Weather> error:',error);
             });
+
+        this.Sites = this.getApp.then(()=>{
+                return this.getSites();
+            })
+        //new Observable(observer => {
+        //     .then((sites) => {
+        //         observer.next(sites);
+        //         observer.complete();
+        //     })   
+        // });
+    }
+
+    public getSites() : Promise<any> {
+        let url = `_api/App_Buttons?filter={"appid":${consts.appid}}&expand=[{"table":"Notifications","key":"id","field":"notificationid"}]`;
+        return this.get(url)
+          .then( res => {
+            let sites = res.json().map(button => {
+              button.style = {};
+              button.style['color'] = button.text_color;
+              button.style['background-color'] = button.back_color;
+              if(button.border == 'true'){
+                button.style['border-color'] = button.border_color;
+                button.style['border-width'] = button.border_width;
+              }
+            
+              return button;
+            })
+    
+            sites.sort((a:any,b:any)=>{
+              if(parseInt(a.order) > parseInt(b.order))
+                return 1;
+              return -1;
+            })
+    
+            return sites;
+          })
+          .catch(error => {
+            return [];
+          })
     }
 
     public getDic() : void {

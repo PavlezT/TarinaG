@@ -29,15 +29,16 @@
 <ion-content>
 
   <div class="globalFirstCard"></div>
-
+  <div class="spinner"><ion-spinner *ngIf="!news || news.length == 0"></ion-spinner></div>
   <ion-card class="globalCard" *ngFor="let n of news" (click)="openNews(n)">
     <ion-item>
       <ion-icon item-start style="height: 25px; width: 25px; margin-left:6px;">
-        <img src="assets/imgs/{{n.icon}}.png">
+        <img src="{{n.logourl}}" >
       </ion-icon>
       <h3>{{n.date}}</h3>
-      <p>{{n.text}}</p>
-      <p><b>{{service.dic.ReadMore}}</b></p>      
+      <!-- <p [innerText]="n.content" ></p> -->
+      <p [innerHTML]="n.content"></p>
+      <!-- <p><b>{{service.dic.ReadMore}}</b></p>       -->
     </ion-item>
   </ion-card>
 

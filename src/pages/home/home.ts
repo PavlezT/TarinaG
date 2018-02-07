@@ -7,7 +7,6 @@ import { SubmenuPage } from '../submenu/submenu';
 import { SettingsPage } from '../settings/settings';
 import { GeneralService } from '../../utils/service';
 import { Toast } from '../../utils/toast';
-import * as consts from '../../utils/consts';
 
 @Component({
   selector: 'page-home',
@@ -15,7 +14,7 @@ import * as consts from '../../utils/consts';
 })
 export class HomePage {
 
-  services: Array<{ name: string, icon: string, notification: boolean, component: any }>;
+  services: Array<{ name: string, icon: string, notificationid: string, component: any, newNews : boolean }>;
   loader : Loading;
 
   constructor(public navCtrl: NavController, @Inject(GeneralService) public service : GeneralService,
@@ -23,20 +22,6 @@ export class HomePage {
     this.services = null;
     
   }
-
-  // setServices() {
-  //   this.services = null;// [
-  //     // { back_color : 'red', border : 'true', border_color : 'red', border_width : '10px',
-  //     // logourl : 'https://', notificationid : '123123', order : '1' , text : 'asd', text_color : 'red' }
-  //     // { name: 'Website', icon: 'wwwlogo', notification: true, component: null },
-  //     // { name: 'Facebook', icon: 'fblogo', notification: false, component: null },
-  //     // { name: 'Instagram', icon: 'instalogo', notification: true, component: null },
-  //     // { name: 'Twitter', icon: 'twitterlogo', notification: true, component: null },
-  //     // { name: 'YouTube', icon: 'youtubelogo', notification: false, component: null },
-  //     // { name: 'NexGolf', icon: 'nglogo', notification: true, component: SubmenuPage },
-  //     // { name: 'Addional Services', icon: 'aslogo', notification: false, component: SubmenuPage }
-  //   //]
-  // }
 
   openService(s) {
     if (s.component) {
@@ -49,7 +34,7 @@ export class HomePage {
         zoom : 'no',
         hidden : 'yes'
       });
-      // browser.hide(); 
+       
       this.showLoader();
       try{
         browser.on('loadstop').subscribe((type)=>{
@@ -66,8 +51,6 @@ export class HomePage {
         this.loader.dismiss();
       }
     }
-
-    this.toast.showToast('locale:' + this.service.locale);
   }
 
   openSettings(){
@@ -77,9 +60,58 @@ export class HomePage {
   ionViewDidEnter(){
     this.service.getApp
       .then(()=>{
-        this.getSites();
+        return this.service.Sites;
       })
+      .then(sites => {
+        this.services = sites;
+        return this.getNews(sites);
+      })
+      .then((newNews)=>{
+        window.localStorage.clear();
+        newNews.map(news => {
+          let oldnews = window.localStorage.getItem(news.id);
+          if( !oldnews || (oldnews && (new Date(oldnews)) < news.date ) ){
+            window.localStorage.setItem(news.id,news.date.toJSON());
+            this.addNotification(news.id.toString());
+          }
+        })
+        
+      })
+  }
+
+  private addNotification(newsid : string) : void {
+    this.services.filter((but,index) => {
+      if(but.notificationid == newsid)
+        this.services[index].newNews = true;
+    })
+  }
+
+  getNews(sites : Array<any> ) : Promise<any> {
+    let notifications = {};
+    let news = [];
     
+    sites.map(but=>{
+      if(but && but.notificationid && !notifications[but.notificationid] ){
+        notifications[but.notificationid] = but.logourl;
+      }
+    });
+
+    let url = `_api/Notifications`;
+    return this.service.get(url)
+      .then( res => {
+        res.json().map(notif => {
+          if( notifications[notif.id.toString()] && notif.date ){
+            notif.date = notif.date ? (new Date(notif.date)) : new Date();
+            news.push(notif);
+          }
+        })
+      })
+      .then(()=>{
+        return news;
+      })
+      .catch(error=>{
+        return [];
+      });
   }
 
   public showLoader() : Promise<any> {
@@ -88,35 +120,6 @@ export class HomePage {
     });
 
     return this.loader.present();
-  }
-
-  public getSites() : Promise<any> {
-    let url = `_api/App_Buttons?filter={"appid":${consts.appid}}&expand=[{"table":"Notifications","key":"id","field":"notificationid"}]`;
-    return this.service.get(url)
-      .then( res => {
-        this.services = res.json().map(button => {
-          button.style = {};
-          button.style['color'] = button.text_color;
-          button.style['background-color'] = button.back_color;
-          if(button.border == 'true'){
-            button.style['border-color'] = button.border_color;
-            button.style['border-width'] = button.border_width;
-          }
-        
-          return button;
-        })
-
-        this.services.sort((a:any,b:any)=>{
-          if(parseInt(a.order) > parseInt(b.order))
-            return 1;
-          return -1;
-        })
-
-        this.service.Sites = this.services;
-      })
-      .catch(error => {
-        this.services = [];
-      })
   }
 
 }
