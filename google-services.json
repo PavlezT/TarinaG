@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "650902200817",
+    "firebase_url": "https://golf-test-notifications.firebaseio.com",
+    "project_id": "golf-test-notifications",
+    "storage_bucket": "golf-test-notifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650902200817:android:005b70fb4babe66e",
+        "android_client_info": {
+          "package_name": "club.golf.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650902200817-ssp3p7r4uvhidtcsf12b9uqujrfe2k9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_fM1CZtoF-K0YQgQH2J78i8jfG2-236Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

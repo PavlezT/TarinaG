@@ -18,7 +18,8 @@ export class HomePage {
   loader : Loading;
 
   constructor(public navCtrl: NavController, @Inject(GeneralService) public service : GeneralService,
-              private iab: InAppBrowser,public loadingCtrl: LoadingController, @Inject(Toast) public toast : Toast) {
+              private iab: InAppBrowser,public loadingCtrl: LoadingController, @Inject(Toast) public toast : Toast
+            ) {
     this.services = null;
     
   }
@@ -67,7 +68,7 @@ export class HomePage {
         return this.getNews(sites);
       })
       .then((newNews)=>{
-        window.localStorage.clear();
+        //window.localStorage.clear();/// delete 
         newNews.map(news => {
           let oldnews = window.localStorage.getItem(news.id);
           if( !oldnews || (oldnews && (new Date(oldnews)) < news.date ) ){

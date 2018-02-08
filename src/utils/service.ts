@@ -111,7 +111,7 @@ export class GeneralService {
                 return this.app.logourl;
             })
             .catch(error=>{
-                console.error('<Error occur> loading app');
+                console.error('<Error occur> loading app',error);
             })
     }
 
