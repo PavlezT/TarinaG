@@ -18,15 +18,16 @@ export var fi = {
     "Restaurant" : "Ravintola",
     "GolfPartners" : "Pelikaverit",
     "AddServices" : "Oheispalvelut",
-    "Weather" : "Sдд",
+    "Weather" : "Sää",
     "GenSettings" : "Yleiset Asetukset",
-    "Notifications" : "Herдtteet",
+    "Notifications" : "Herätteet",
     "Givefeedback" : "Anna palautetta ohjelmasta",
     "About" : "Tietoja ohjelmasta",
-    "ReadMore" : "Lue lisдд...",
-    "ShowMore" : "Nдytд lisдд...",
+    "ReadMore" : "Lue lisää...",
+    "ShowMore" : "Nдytд lisää...",
     "Help" : "Auta",
     "Username" : "Jäsennumero",
     "Password" : "Salasana",
-    "Login" : 'Kirjaudu'
+    "Login" : 'Kirjaudu',
+    "AccountsSetting" : "Tiliasetukset"
 }

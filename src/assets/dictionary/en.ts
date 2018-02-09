@@ -28,5 +28,6 @@ export var en={
     "Help" : "Help",
     "Username" : "Username",
     "Password" : "Password",
-    "Login" : 'Login'
+    "Login" : 'Login',
+    "AccountsSetting" : "Accounts Settings"
 }

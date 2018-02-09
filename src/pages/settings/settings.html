@@ -47,7 +47,7 @@
 
   <ion-card class="globalCard2" *ngIf="accounts && accounts.length > 0">
     <ion-list-header class="globalListHeading">
-      Account Settings
+      {{service.dic.AccountsSettings}}
     </ion-list-header>
     <button ion-item *ngFor="let a of accounts" (click)="openAccountSettings(a)">
       <ion-icon item-start style="height: 25px; width: 25px">

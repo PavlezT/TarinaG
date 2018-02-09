@@ -52,7 +52,11 @@ export class PartnersPage {
   public getIcons() : Promise<any>{
     return this.service.get(`_api/Partners_Icons?filter={"appid":${this.service.app.id}}`)
       .then((icons)=>{
-        this.Icons = icons.json();
+        this.Icons = icons.json().sort((a,b)=>{
+          if(parseInt(a.order) > parseInt(b.order))
+            return 1;
+          return -1;
+        })
       })
       .catch(error=>{
         console.error('<Get Icons> error:', error);
