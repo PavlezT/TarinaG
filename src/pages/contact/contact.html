@@ -26,11 +26,11 @@
 </ion-header>
 
 <ion-content padding>
-  <div style="font-size:12px">
+  <div class="spinner"><ion-spinner *ngIf="!contactsInformation"></ion-spinner></div>
+  <div class="contacts_inner" *ngIf="contactsInformation" [innerHTML]="contactsInformation">
+    <!-- TarinaGolf ry ja Tarinaharjun Golf Oy<br><br><br> -->
 
-    TarinaGolf ry ja Tarinaharjun Golf Oy<br><br><br>
-
-    <div *ngFor="let d of details">
+    <!-- <div *ngFor="let d of details">
       <b>{{d.heading}}</b><br>
       {{d.content}}<br><br><br>
     </div>
@@ -57,6 +57,6 @@
     
     <br>
     <br>
-    <div>Puhelun hinta sekä kiinteästä-, että matkapuhelimesta soitettaessa: 8,35 snt/puh + 16,69 snt/min</div>
+    <div>Puhelun hinta sekä kiinteästä-, että matkapuhelimesta soitettaessa: 8,35 snt/puh + 16,69 snt/min</div> -->
   </div>
 </ion-content>

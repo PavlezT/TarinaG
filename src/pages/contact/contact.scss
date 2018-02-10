@@ -8,4 +8,26 @@ page-contact {
     .moreIcon {
         font-size:40px;
     } 
+    .spinner{
+        width: 100%;
+        position: relative;
+        margin: auto;
+        ion-spinner {
+            margin: auto;
+            position: absolute;
+        }
+    }
+
+    .contacts_inner{
+        font-size:12px;
+
+        table{
+            width: 100%;
+            border: 0px !important;
+
+            td{
+                padding: 5px;
+            }
+        }
+    }
 }

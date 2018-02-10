@@ -10,18 +10,25 @@ import { GeneralService } from '../../utils/service';
 })
 export class ContactPage {
 
-  details: Array<{ heading: string, content: string }>;
+  contactsInformation : string;
 
   constructor(public navCtrl: NavController, @Inject(GeneralService) public service : GeneralService) {
     this.setDetails();
   }
 
   setDetails() {
-    this.details = [
-      { heading: 'Käyntiosoite', content: 'Tarinagolfintie 19, 71800 Siilinjärvi' },
-      { heading: 'Laskutusosoite', content: 'Tarinagolf ry ja/tai Tarinaharjun Golf Oy, PL 24, 70501 Kuopio' },
-      { heading: 'Sähköposti', content: 'toimisto@tarinagolf.fi' }
-    ]
+    this.service.getApp
+      .then(() => {
+        return this.service.get(`_api/Contacts/appid/${this.service.app.id}`)
+      })
+      .then((res)=>{
+        let info = res.json();
+
+        if(info && info[0] && info[0].text)
+          this.contactsInformation = info[0].text;
+        else 
+          this.contactsInformation = ' ';
+      })
   }
 
   openSettings(){
