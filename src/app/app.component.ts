@@ -50,6 +50,10 @@ export class MyApp {
         console.log("Received in foreground");
         this.toast.showToast(data.content);
       };
+      // let messages : any = window.localStorage.getItem('DirectMessages');
+      // messages = JSON.parse(messages || '[]');
+      // messages.push({date : (new Date(Date.now())).toJSON(), content : data.content, logourl : 'assets/imgs/dmlogo.png' })
+      // window.localStorage.setItem('DirectMessages', JSON.stringify(messages));
     })
 
   }
