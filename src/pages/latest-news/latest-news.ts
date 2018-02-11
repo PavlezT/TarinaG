@@ -61,19 +61,30 @@ export class LatestNewsPage {
             date : message.date
           })
         })
-
-        this.news.sort((a,b)=>{
-          console.log('a.date:',(new Date(a.date)))
-          console.log('b.date:',(new Date(b.date)));
-          console.log("compare:",(new Date(a.date)).getTime() < (new Date(b.date)).getTime())
-          if( (new Date(a.date)) < (new Date(b.date)) )
-            return 1;
-          console.log('not 1;')
-          if( (new Date(a.date)) > (new Date(b.date)))
-            return -1;
-          console.log('not -1;')
-          return 0;
-        })
+      
+        for(var i = 0; i < this.news.length ; i++){
+          for(var j = 0; j < this.news.length; j++){
+            var time1 = (new Date(this.news[i].date)).getTime();
+            var time2 = (new Date(this.news[j].date)).getTime();
+            if( time1 >= time2 ){
+              var temp = this.news[j];
+              this.news[j] = this.news[i];
+              this.news[i] = temp;
+            }
+          }
+        }
+        // this.news.sort((a,b)=>{
+        //   console.log('a.date:',(new Date(a.date)))
+        //   console.log('b.date:',(new Date(b.date)));
+        //   console.log("compare:",(new Date(a.date)).getTime() < (new Date(b.date)).getTime())
+        //   if( (new Date(a.date)) < (new Date(b.date)) )
+        //     return 1;
+        //   console.log('not 1;')
+        //   if( (new Date(a.date)) > (new Date(b.date)))
+        //     return -1;
+        //   console.log('not -1;')
+        //   return 0;
+        // })
 
         console.log('news:',window['news_b'] = this.news)
       })
