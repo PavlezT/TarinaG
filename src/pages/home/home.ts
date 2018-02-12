@@ -7,6 +7,7 @@ import { SubmenuPage } from '../submenu/submenu';
 import { SettingsPage } from '../settings/settings';
 import { GeneralService } from '../../utils/service';
 import { Toast } from '../../utils/toast';
+import { Badge } from '@ionic-native/badge';
 
 @Component({
   selector: 'page-home',
@@ -16,12 +17,14 @@ export class HomePage {
 
   services: Array<{ name: string, icon: string, notificationid: string, component: any, newNews : boolean }>;
   loader : Loading;
+  number : number;
 
   constructor(public navCtrl: NavController, @Inject(GeneralService) public service : GeneralService,
-              private iab: InAppBrowser,public loadingCtrl: LoadingController, @Inject(Toast) public toast : Toast
-            ) {
+      private iab: InAppBrowser,public loadingCtrl: LoadingController, @Inject(Toast) public toast : Toast,
+      public badge: Badge
+  ) {
     this.services = null;
-    
+    this.number = 0;
   }
 
   openService(s) {
@@ -30,6 +33,17 @@ export class HomePage {
         pageName: s.name
       });
     } else {
+      console.log('s:',s)
+      if(s.newNews == true){
+        if(this.number-1 > 0)
+          this.badge.decrease( 1 );
+        else
+          this.badge.clear();
+        
+        s.newNews = false;
+        window.localStorage.setItem(s.notificationid,s.Notifications.date);
+      }
+      
       const browser = this.iab.create(s.link,'_blank',{
         location : 'no',
         zoom : 'no',
@@ -59,8 +73,10 @@ export class HomePage {
   }
 
   ionViewDidEnter(){
+    this.number = 0;
     this.service.getApp
       .then(()=>{
+        this.badge.clear();
         return this.service.Sites;
       })
       .then(sites => {
@@ -72,7 +88,6 @@ export class HomePage {
         newNews.map(news => {
           let oldnews = window.localStorage.getItem(news.id);
           if( !oldnews || (oldnews && (new Date(oldnews)) < news.date ) ){
-            window.localStorage.setItem(news.id,news.date.toJSON());
             this.addNotification(news.id.toString());
           }
         })
@@ -82,8 +97,10 @@ export class HomePage {
 
   private addNotification(newsid : string) : void {
     this.services.filter((but,index) => {
-      if(but.notificationid == newsid)
+      if(but.notificationid == newsid){
         this.services[index].newNews = true;
+        this.badge.increase(++this.number);
+      }
     })
   }
 

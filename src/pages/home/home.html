@@ -30,7 +30,7 @@
 
   <div class="globalFirstCard"></div>
   <div class="spinner"><ion-spinner *ngIf="!services"></ion-spinner></div>
-  <ion-card class="globalCard" *ngFor="let s of services" (click)="openService(s)" [ngStyle]="s.style">
+  <ion-card class="globalCard" *ngFor="let s of services" (tap)="openService(s)" [ngStyle]="s.style">
     <ion-item [ngStyle]="s.style">
       <ion-avatar item-start>
         <img src="{{service.serverAPIUrl+s.logourl}}" >

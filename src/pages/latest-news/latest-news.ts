@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
 import { LoadingController, Loading } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -16,21 +16,26 @@ export class LatestNewsPage {
   loader : Loading;
 
   constructor(public navCtrl: NavController, @Inject(GeneralService) public service : GeneralService,
-  private iab: InAppBrowser,public loadingCtrl: LoadingController) {
-    
+  private iab: InAppBrowser,public loadingCtrl: LoadingController,public events: Events) {
+    this.events.subscribe('news:check',()=>{
+      this.loadView();
+    });
   }
 
   ionViewDidEnter(){
-    this.service.getApp
+    this.loadView();
+  };
+
+  public loadView() : Promise<any> {
+    return this.service.getApp
       .then(()=>{
         this.service.Sites.then((sites)=>{
           this.getNews(sites);
         })
       })
-  };
+  }
 
-
-  getNews(sites : Array<any> ) : Promise<any> {
+  public getNews(sites : Array<any> ) : Promise<any> {
     let notifications = {};
     this.news = [];
     
@@ -64,27 +69,22 @@ export class LatestNewsPage {
       
         for(var i = 0; i < this.news.length ; i++){
           for(var j = 0; j < this.news.length; j++){
-            var time1 = (new Date(this.news[i].date)).getTime();
-            var time2 = (new Date(this.news[j].date)).getTime();
-            if( time1 >= time2 ){
+            var time1 = (new Date(this.news[i].date));
+            var time2 = (new Date(this.news[j].date));
+            
+            if(time1.getFullYear() == time2.getFullYear() && time1.getMonth() == time2.getMonth() && time1.getDay() == time2.getDay()){
+              if( (time1.getHours() < time2.getHours()) || (time1.getHours() == time2.getHours() && time1.getMinutes() < time2.getMinutes()) ){
+                var temp = this.news[i];
+                this.news[i] = this.news[j];
+                this.news[j] = temp;
+              }
+            } else if(time1 > time2 ){
               var temp = this.news[j];
               this.news[j] = this.news[i];
               this.news[i] = temp;
             }
           }
         }
-        // this.news.sort((a,b)=>{
-        //   console.log('a.date:',(new Date(a.date)))
-        //   console.log('b.date:',(new Date(b.date)));
-        //   console.log("compare:",(new Date(a.date)).getTime() < (new Date(b.date)).getTime())
-        //   if( (new Date(a.date)) < (new Date(b.date)) )
-        //     return 1;
-        //   console.log('not 1;')
-        //   if( (new Date(a.date)) > (new Date(b.date)))
-        //     return -1;
-        //   console.log('not -1;')
-        //   return 0;
-        // })
 
         console.log('news:',window['news_b'] = this.news)
       })

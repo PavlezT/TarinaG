@@ -25,6 +25,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { FCM } from '@ionic-native/fcm';
+import { Badge } from '@ionic-native/badge';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,7 @@ import { FCM } from '@ionic-native/fcm';
   ],
   providers: [
     StatusBar,InAppBrowser,NativeStorage,FCM,
-    SplashScreen,GeneralService,Toast,AppVersion,
+    SplashScreen,GeneralService,Toast,AppVersion,Badge,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
