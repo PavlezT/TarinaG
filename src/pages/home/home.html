@@ -35,7 +35,7 @@
       <ion-avatar item-start>
         <img src="{{service.serverAPIUrl+s.logourl}}" >
       </ion-avatar>
-      <h2>{{s.text}}</h2>
+      <h2>{{service.locale == 'fi' && s.text_fin && s.text_fin.length > 0? s.text_fin : s.text}}</h2>
       <ion-icon *ngIf="s.newNews" class="notificationIcon" color="secondary" item-right name="ios-alert-outline"></ion-icon>
     </ion-item>
   </ion-card>

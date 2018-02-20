@@ -97,10 +97,13 @@ export class GeneralService {
     }
 
     public getDic() : void {
-        if( this.locale.toLowerCase().includes('fi') )
+        if( this.locale.toLowerCase().includes('fi') ){
             this.dic = transfi.fi;
-        else 
+            this.locale = 'fi';
+        } else {
             this.dic = transen.en;
+            this.locale = 'en';
+        }
     }
 
     public loadApp(app_name) : Promise<any> {

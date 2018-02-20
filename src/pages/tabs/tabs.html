@@ -1,7 +1,17 @@
-<ion-tabs>
-  <ion-tab [root]="tab1Root" [tabTitle]="service.dic.home" tabIcon="md-home"></ion-tab>
-  <ion-tab [root]="tab2Root" [tabTitle]="service.dic.TeeTimes" tabIcon="md-calendar"></ion-tab>
-  <ion-tab [root]="tab3Root" [tabTitle]="service.dic.LatestNews" tabIcon="md-time"></ion-tab>
-  <ion-tab [root]="tab4Root" [tabTitle]="service.dic.Partners" tabIcon="md-people"></ion-tab>
-  <ion-tab [root]="tab5Root" [tabTitle]="service.dic.Contact" tabIcon="md-information-circle"></ion-tab>
-</ion-tabs>
+<!-- <ion-content> -->
+  <ion-tabs>
+    <ion-tab [root]="tab1Root" [tabTitle]="service.dic.home" tabIcon="md-home"></ion-tab>
+    <ion-tab [root]="tab2Root" [tabTitle]="service.dic.TeeTimes" tabIcon="md-calendar"></ion-tab>
+    <ion-tab [root]="tab3Root" [tabTitle]="service.dic.LatestNews" tabIcon="md-time"></ion-tab>
+    <ion-tab [root]="tab4Root" [tabTitle]="service.dic.Partners" tabIcon="md-people"></ion-tab>
+    <ion-tab [root]="tab5Root" [tabTitle]="service.dic.Contact" tabIcon="md-information-circle"></ion-tab>
+  </ion-tabs>
+  <div id="custom-overlay" *ngIf="splash" [style.background-color]="backcolor" (tap)="openLink()">
+      <button class="hide_splash" ion-button icon-only *ngIf="button" (tap)="hideSplash()" >
+        <ion-icon name="md-close-circle"></ion-icon>
+      </button>
+      <!-- *ngIf="!button" -->
+      <span class="timer">{{timer}} sec</span>
+      <img [src]="imageUrl" >
+  </div>
+<!-- </ion-content> -->
