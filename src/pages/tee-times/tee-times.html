@@ -26,7 +26,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding [style.background-color]="service.app.back_color" [style.background-image]="service.app.back_image" >
   <div id="teetimes">
     <iframe frameborder="0" allowfullscreen="" [src]="teetimes_href" ></iframe>
   </div>

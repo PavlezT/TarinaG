@@ -3,6 +3,7 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Platform } from 'ionic-angular';
 import { AppVersion } from '@ionic-native/app-version';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import * as consts from './consts';
 import * as transen from '../assets/dictionary/en';
@@ -24,7 +25,7 @@ export class GeneralService {
 
     getApp : Promise<any>;
 
-    constructor (private  http: Http,public plt: Platform,private appVersion: AppVersion) {
+    constructor (private  http: Http,public plt: Platform,private appVersion: AppVersion,private sanitizer: DomSanitizer) {
         this.serverAPIUrl = consts.siteUrl;
         this.user = null;
         this.logo = 'assets/imgs/logo.gif';
@@ -78,6 +79,8 @@ export class GeneralService {
               if(button.border == 'true'){
                 button.style['border-color'] = button.border_color;
                 button.style['border-width'] = button.border_width;
+                button.style['border-radius'] = button.border_radius;
+                button.style['box-shadow'] = button.box_shadow;
               }
             
               return button;
@@ -111,6 +114,8 @@ export class GeneralService {
             .then(data=>{
                 this.app = data.json()[0];
                 this.logo = this.serverAPIUrl+this.app.logourl;
+                this.app.back_image = this.sanitizer.bypassSecurityTrustStyle(`url('${this.serverAPIUrl+this.app.back_image}')`);
+                console.log('this.app:',this.app.back_image)
                 return this.app.logourl;
             })
             .catch(error=>{

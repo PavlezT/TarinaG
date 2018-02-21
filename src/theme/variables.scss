@@ -97,3 +97,9 @@ $colors: (
   max-width: 50px;
   max-height: 40px
 }
+
+.content {
+  background-position: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}

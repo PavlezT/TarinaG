@@ -26,18 +26,17 @@
 
 </ion-header>
 
-<ion-content>
-
+<ion-content [style.background-color]="service.app.back_color" [style.background-image]="service.app.back_image" >
   <div class="globalFirstCard"></div>
   <div class="spinner"><ion-spinner *ngIf="!services"></ion-spinner></div>
-  <ion-card class="globalCard" *ngFor="let s of services" (tap)="openService(s)" [ngStyle]="s.style">
-    <ion-item [ngStyle]="s.style">
+  <ion-card class="globalCard" *ngFor="let s of services" (tap)="openService(s)" [ngStyle]="s.style"  >
+    <button ion-item [ngStyle]="s.style" animates #animation="animates" (tap)="s.animation == 'true' && animation.start({type: 'zoomIn', duration: '500'})">
       <ion-avatar item-start>
         <img src="{{service.serverAPIUrl+s.logourl}}" >
       </ion-avatar>
       <h2>{{service.locale == 'fi' && s.text_fin && s.text_fin.length > 0? s.text_fin : s.text}}</h2>
-      <ion-icon *ngIf="s.newNews" class="notificationIcon" color="secondary" item-right name="ios-alert-outline"></ion-icon>
-    </ion-item>
+      <ion-icon *ngIf="s.newNews" class="notificationIcon" [style.color]="s.notif_color" item-right name="ios-alert-outline"></ion-icon>
+    </button>
   </ion-card>
 
 </ion-content>

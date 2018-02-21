@@ -27,6 +27,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { FCM } from '@ionic-native/fcm';
 import { Badge } from '@ionic-native/badge';
 
+import { AnimationService, AnimatesDirective } from 'css-animator';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -41,7 +43,8 @@ import { Badge } from '@ionic-native/badge';
     AccountsPage,
     FeedbackPage,
     NotificationsPage,
-    SettingsPage
+    SettingsPage,
+    AnimatesDirective
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ import { Badge } from '@ionic-native/badge';
   ],
   providers: [
     StatusBar,InAppBrowser,NativeStorage,FCM,
+    AnimationService,
     SplashScreen,GeneralService,Toast,AppVersion,Badge,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
