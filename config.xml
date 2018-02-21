@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="club.golf.app" version="0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="club.golf.app" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Tarina Golf</name>
     <description>Tarina Golf App</description>
     <author email="ghostor2011@gmail.com" href="https://www.upwork.com/freelancers/~0161fef585cf8f7714/">Azhar Asif</author>

@@ -68,7 +68,7 @@ export class LatestNewsPage {
         })
       
         for(var i = 0; i < this.news.length ; i++){
-          for(var j = 0; j < this.news.length; j++){
+          for(var j = i; j < this.news.length; j++){
             var time1 = (new Date(this.news[i].date));
             var time2 = (new Date(this.news[j].date));
             
@@ -78,7 +78,7 @@ export class LatestNewsPage {
                 this.news[i] = this.news[j];
                 this.news[j] = temp;
               }
-            } else if(time1 > time2 ){
+            } else if(time1 < time2 ){
               var temp = this.news[j];
               this.news[j] = this.news[i];
               this.news[i] = temp;
