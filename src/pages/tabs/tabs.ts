@@ -1,4 +1,9 @@
 import { Component, Inject } from '@angular/core';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { Platform, Events } from 'ionic-angular';
+import { File } from '@ionic-native/file';
+import { Injectable } from '@angular/core';
 
 import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
@@ -8,6 +13,8 @@ import { PartnersPage } from '../partners/partners';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { GeneralService } from '../../utils/service';
+
+declare var cordova:any;
 
 @Component({
   selector: 'tabs-page',
@@ -28,7 +35,11 @@ export class TabsPage {
   timer : number;
   link : string;
 
-  constructor( @Inject(GeneralService) public service : GeneralService,private iab: InAppBrowser) {
+  fileTransfer : FileTransferObject;
+
+  constructor( public platform: Platform, @Inject(GeneralService) public service : GeneralService,private iab: InAppBrowser,
+    private file: File, public nativeStorage : NativeStorage, private transfer: FileTransfer) 
+  {
     this.splash = true;
     this.button = true;//false
     this.backcolor = 'rgba(200,200,200,0.8)';
@@ -37,11 +48,16 @@ export class TabsPage {
     this.link = null;//'https://www.google.com';
 
     try{
+      this.fileTransfer = this.transfer.create();
+     }catch(e){console.log('<Iamges> FileTransfer _initing error',e)};
+
+    try{
       var item : any = window.localStorage.getItem('splash');
       if(item && item.length > 0){
         item = JSON.parse(item);
         this.backcolor = item.backcolor;
-        this.imageUrl = item.imageUrll;
+        // this.imageUrl = item.imageUrl;
+        this.loadImage(item.imageUrl);
         this.timer = parseInt(item.timer) || 5;
         this.link  = item.link;
       }
@@ -49,7 +65,7 @@ export class TabsPage {
       console.log('<SplashScreen> JSON.parse error:',e);
     }
 
-    this.startShow();
+    // this.startShow();
     this.service.getApp.then(()=>{this.getSpashScreen()});
   } 
 
@@ -61,13 +77,13 @@ export class TabsPage {
           return false;
         
         if( (this.service.serverAPIUrl + splash[0].imageUrl) != this.imageUrl)
-          this.imageUrl = this.service.serverAPIUrl+splash[0].imageUrl;
+          this.loadImage(this.service.serverAPIUrl+splash[0].imageUrl);// this.imageUrl = this.service.serverAPIUrl+splash[0].imageUrl;
         if( splash[0].backcolor != this.backcolor)
           this.backcolor = splash[0].backcolor;
         if( splash[0].link != this.link)
           this.link = splash[0].link;
 
-        window.localStorage.setItem('splash',JSON.stringify({backcolor : this.backcolor,imageUrl : this.imageUrl,timer : (parseInt(splash[0].timer) || 5),link : this.link}))
+        window.localStorage.setItem('splash',JSON.stringify({backcolor : this.backcolor,imageUrl : this.service.serverAPIUrl+splash[0].imageUrl ,timer : (parseInt(splash[0].timer) || 5),link : this.link}))
       })
       .catch(error=>{
         console.log('<SplashScreen custom> error:',error);
@@ -113,5 +129,23 @@ export class TabsPage {
       console.log('Run in browser');
     }
   }
+
+  private loadImage(url) : Promise<any> {
+    return this.platform.ready().then(() => {
+      let endpointURI = cordova && cordova.file && cordova.file.dataDirectory ? cordova.file.dataDirectory : 'file:///android_asset/';
+
+      return (this.fileTransfer && this.fileTransfer.download(url,endpointURI+(Date.now())+'.png',true,{headers:{'Content-Type':`image/png`,'Accept':`image/webp`}}))
+          .then(data=>{
+              console.log('<Image> file transfer success',data);
+              this.imageUrl = data.nativeURL;
+              this.startShow();
+          })
+          .catch(err=>{
+              console.error('<Images> file transfer error',err);
+              this.startShow();
+          })
+    })
+  }
+
 
 }
