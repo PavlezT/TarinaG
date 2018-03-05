@@ -11,6 +11,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding [style.background-color]="service.app.back_color" [style.background-image]="service.app.back_image">
-
+<ion-content padding [style.background-color]="service.app.back_color" [style.background-image]="service.app.back_image" >
+  <div class="spinner"><ion-spinner *ngIf="!contactsInformation"></ion-spinner></div>
+  <div class="contacts_inner" *ngIf="contactsInformation" [innerHTML]="contactsInformation"></div>
 </ion-content>

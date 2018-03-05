@@ -135,8 +135,8 @@ export class GeneralService {
 
     public httpGet(queryUrl: string) : Promise<any>{
         let headers = new Headers();
-        headers.append('Accept', 'application/json;odata=verbose');
-        headers.append('Content-Type', 'application/json;odata=verbose');
+        headers.append('Accept', 'application/json');
+        headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({headers: headers})
         return this.http.get(queryUrl, options).toPromise();
             // .then((response: Object) => {
@@ -155,8 +155,8 @@ export class GeneralService {
 
     public httpPost (queryUrl: string, object: Object)  : Promise<any>{
         let headers = new Headers();
-        headers.append('Accept', 'application/json;odata=verbose');
-        headers.append('Content-Type', 'application/json;odata=verbose');
+        headers.append('Accept', 'application/json');
+        headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({headers: headers})
         return this.http.post(queryUrl, object , options).toPromise();
             // .then((response: Object) => {

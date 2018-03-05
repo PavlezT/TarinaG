@@ -33,7 +33,6 @@ export class HomePage {
         pageName: s.name
       });
     } else {
-      console.log('s:',s)
       if(s.newNews == true){
         if(this.number-1 > 0)
           this.badge.decrease( 1 );

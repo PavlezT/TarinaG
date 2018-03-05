@@ -13,5 +13,26 @@
 
 
 <ion-content padding [style.background-color]="service.app.back_color" [style.background-image]="service.app.back_image" >
+  <ion-list>
 
+    <ion-item>
+      <ion-label>Your name</ion-label>
+      <ion-input #name type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Your email</ion-label>
+      <ion-input #email type="email"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>Message text</ion-label>
+      <ion-textarea #text rows="8"></ion-textarea>
+    </ion-item>
+  
+  </ion-list>
+  
+  <div padding>
+    <button ion-button large color="secondary" (tap)="sendMessage($event)">Send</button>
+  </div>
 </ion-content>

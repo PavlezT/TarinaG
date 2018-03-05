@@ -8,8 +8,25 @@ import { GeneralService } from '../../utils/service';
 })
 export class AboutPage {
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController,@Inject(GeneralService) public service : GeneralService) {
+  contactsInformation : string;
 
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController,@Inject(GeneralService) public service : GeneralService) {
+    this.setDetails();
+  }
+
+  setDetails() {
+    this.service.getApp
+      .then(() => {
+        return this.service.get(`_api/AboutInfo/appid/${this.service.app.id}`)
+      })
+      .then((res)=>{
+        let info = res.json();
+
+        if(info && info[0] && info[0].text)
+          this.contactsInformation = info[0].text;
+        else 
+          this.contactsInformation = ' ';
+      })
   }
 
   dismissView() {
