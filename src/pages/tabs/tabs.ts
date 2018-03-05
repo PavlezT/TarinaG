@@ -47,26 +47,27 @@ export class TabsPage {
     this.timer = 10;
     this.link = null;//'https://www.google.com';
 
-    try{
-      this.fileTransfer = this.transfer.create();
-     }catch(e){console.log('<Iamges> FileTransfer _initing error',e)};
-
-    try{
-      var item : any = window.localStorage.getItem('splash');
-      if(item && item.length > 0){
-        item = JSON.parse(item);
-        this.backcolor = item.backcolor;
-        // this.imageUrl = item.imageUrl;
-        this.loadImage(item.imageUrl);
-        this.timer = parseInt(item.timer) || 5;
-        this.link  = item.link;
+    this.platform.ready().then(() => {
+      try{
+        this.fileTransfer = this.transfer.create();
+      }catch(e){console.log('<Iamges> FileTransfer _initing error',e)};
+      
+      try{
+        var item : any = window.localStorage.getItem('splash');
+        if(item && item.length > 0){
+          item = JSON.parse(item);
+          this.backcolor = item.backcolor;
+          // this.imageUrl = item.imageUrl;
+          this.loadImage(item.imageUrl);
+          this.timer = parseInt(item.timer) || 5;
+          this.link  = item.link;
+        }
+      }catch(e){
+        console.log('<SplashScreen> JSON.parse error:',e);
       }
-    }catch(e){
-      console.log('<SplashScreen> JSON.parse error:',e);
-    }
-
-    // this.startShow();
-    this.service.getApp.then(()=>{this.getSpashScreen()});
+      // this.startShow();
+      this.service.getApp.then(()=>{this.getSpashScreen()});
+    })
   } 
 
   public getSpashScreen() : Promise<any> {
@@ -131,7 +132,6 @@ export class TabsPage {
   }
 
   private loadImage(url) : Promise<any> {
-    return this.platform.ready().then(() => {
       let endpointURI = cordova && cordova.file && cordova.file.dataDirectory ? cordova.file.dataDirectory : 'file:///android_asset/';
 
       return (this.fileTransfer && this.fileTransfer.download(url,endpointURI+(Date.now())+'.png',true,{headers:{'Content-Type':`image/png`,'Accept':`image/webp`}}))
@@ -144,7 +144,6 @@ export class TabsPage {
               console.error('<Images> file transfer error',err);
               this.startShow();
           })
-    })
   }
 
 

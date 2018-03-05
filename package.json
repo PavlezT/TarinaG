@@ -70,8 +70,8 @@
             "cordova-plugin-app-version": {},
             "cordova-plugin-fcm": {},
             "cordova-plugin-badge": {},
-            "cordova-plugin-file-transfer": {},
-            "cordova-plugin-file": {}
+            "cordova-plugin-file": {},
+            "cordova-plugin-file-transfer": {}
         },
         "platforms": [
             "android",
