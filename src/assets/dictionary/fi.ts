@@ -21,7 +21,7 @@ export var fi = {
     "Weather" : "Sää",
     "GenSettings" : "Yleiset Asetukset",
     "Notifications" : "Herätteet",
-    "Givefeedback" : "Anna palautetta ohjelmasta",
+    "Givefeedback" : "Anna palautetta",
     "About" : "Tietoja ohjelmasta",
     "ReadMore" : "Lue lisää...",
     "ShowMore" : "Nдytд lisää...",
@@ -29,5 +29,9 @@ export var fi = {
     "Username" : "Jäsennumero",
     "Password" : "Salasana",
     "Login" : 'Kirjaudu',
-    "AccountsSetting" : "Tiliasetukset"
+    "AccountsSetting" : "Tiliasetukset",
+    "Name" : "Nimi",
+    "Email" : "Sähköposti",
+    "Message" : "Viesti",
+    "Send" : "Lähettää"
 }

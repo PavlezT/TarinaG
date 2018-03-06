@@ -17,7 +17,7 @@
   <ion-card class="globalCard2">
 
     <ion-item *ngFor="let site of Sites" (tap)="changeToggle(site)">
-      <ion-label>{{site.text}}</ion-label>
+      <ion-label>{{service.locale == 'fi' && site.text_fin && site.text_fin.length > 0? site.text_fin : site.text}}</ion-label>
       <ion-toggle color="secondary" [checked]="site.checked" item-end></ion-toggle>
     </ion-item>
 

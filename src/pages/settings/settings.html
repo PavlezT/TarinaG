@@ -58,9 +58,9 @@
   </ion-card>
 
   <ion-card class="globalCard2">
-    <ion-list-header class="globalListHeading">
+    <!-- <ion-list-header class="globalListHeading">
       {{service.dic.Help}}
-    </ion-list-header>
+    </ion-list-header> -->
     <button ion-item *ngFor="let h of helps" (click)="openHelpItem(h)">
       <ion-icon color="secondary" name={{h.icon}} item-start></ion-icon>
       {{ h.name }}

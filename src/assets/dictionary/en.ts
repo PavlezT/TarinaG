@@ -29,5 +29,9 @@ export var en={
     "Username" : "Username",
     "Password" : "Password",
     "Login" : 'Login',
-    "AccountsSetting" : "Accounts Settings"
+    "AccountsSetting" : "Accounts Settings",
+    "Name" : "Name",
+    "Email" : "Email",
+    "Message" : "Message",
+    "Send" : "Send"
 }

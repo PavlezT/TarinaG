@@ -16,23 +16,23 @@
   <ion-list>
 
     <ion-item>
-      <ion-label>Your name</ion-label>
-      <ion-input #name type="text"></ion-input>
+      <!-- <ion-label>Your name</ion-label> -->
+      <ion-input #name type="text" placeholder="{{service.dic.Name}}" ></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label>Your email</ion-label>
-      <ion-input #email type="email"></ion-input>
+      <!-- <ion-label>Your email</ion-label> -->
+      <ion-input #email type="email" placeholder="{{service.dic.Email}}"></ion-input>
     </ion-item>
   
     <ion-item>
-      <ion-label>Message text</ion-label>
-      <ion-textarea #text rows="8"></ion-textarea>
+      <!-- <ion-label>Message text</ion-label> -->
+      <ion-textarea #text rows="8" placeholder="{{service.dic.Message}}"></ion-textarea>
     </ion-item>
   
   </ion-list>
   
   <div padding>
-    <button ion-button large color="secondary" (tap)="sendMessage($event)">Send</button>
+    <button ion-button large color="secondary" (tap)="sendMessage($event)">{{service.dic.Send}}</button>
   </div>
 </ion-content>

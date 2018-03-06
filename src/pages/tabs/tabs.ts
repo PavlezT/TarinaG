@@ -43,7 +43,7 @@ export class TabsPage {
     this.splash = true;
     this.button = true;//false
     this.backcolor = 'rgba(200,200,200,0.8)';
-    this.imageUrl = 'assets/imgs/logo.gif';
+    this.imageUrl = '';//'assets/imgs/logo.gif';
     this.timer = 10;
     this.link = null;//'https://www.google.com';
 
