@@ -28,6 +28,7 @@ import { FCM } from '@ionic-native/fcm';
 import { Badge } from '@ionic-native/badge';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { Device } from '@ionic-native/device';
 
 import { AnimationService, AnimatesDirective } from 'css-animator';
 
@@ -71,7 +72,7 @@ import { AnimationService, AnimatesDirective } from 'css-animator';
   ],
   providers: [
     StatusBar,InAppBrowser,NativeStorage,FCM,
-    AnimationService,FileTransfer,File,
+    AnimationService,FileTransfer,File,Device,
     SplashScreen,GeneralService,Toast,AppVersion,Badge,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

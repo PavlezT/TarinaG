@@ -33,5 +33,10 @@ export var en={
     "Name" : "Name",
     "Email" : "Email",
     "Message" : "Message",
-    "Send" : "Send"
+    "Send" : "Send",
+    "Back" : "Back",
+    "FillFields" : "Fill all the fields",
+    "EnterValidEmail" : "Enter valid email",
+    "MessageSended" : "Your message sended.",
+    "MessageError" : "Your message didn`t send! Some error occur."
 }

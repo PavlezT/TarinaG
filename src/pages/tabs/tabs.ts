@@ -1,9 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { Platform, Events } from 'ionic-angular';
-import { File } from '@ionic-native/file';
-import { Injectable } from '@angular/core';
+import { Platform } from 'ionic-angular';
+import { Device } from '@ionic-native/device';
 
 import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
@@ -35,10 +34,13 @@ export class TabsPage {
   timer : number;
   link : string;
 
+  padding : any;
+
   fileTransfer : FileTransferObject;
 
   constructor( public platform: Platform, @Inject(GeneralService) public service : GeneralService,private iab: InAppBrowser,
-    private file: File, public nativeStorage : NativeStorage, private transfer: FileTransfer) 
+    public nativeStorage : NativeStorage, private transfer: FileTransfer,
+    public device: Device) 
   {
     this.splash = true;
     this.button = true;//false
@@ -46,6 +48,7 @@ export class TabsPage {
     this.imageUrl = '';//'assets/imgs/logo.gif';
     this.timer = 10;
     this.link = null;//'https://www.google.com';
+    this.padding = null;
 
     this.platform.ready().then(() => {
       try{
@@ -67,6 +70,7 @@ export class TabsPage {
       }
       // this.startShow();
       this.service.getApp.then(()=>{this.getSpashScreen()});
+      this.padding = this.device.model.toLowerCase().includes('iphone x');
     })
   } 
 

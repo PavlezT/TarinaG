@@ -23,11 +23,11 @@ export class FeedbackPage {
 
   public sendMessage(event) : any {
     if( !(this.name.value.trim().length > 0 && this.email.value.trim().length > 0 && this.text.value.trim().length > 0))
-      return this.toast.showToast('Fill all the fields!');
+      return this.toast.showToast(this.service.dic.FillFields);
     
     var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if( !reg.test(this.email.value) )
-      return this.toast.showToast('Enter valid email!');
+      return this.toast.showToast(this.service.dic.EnterValidEmail);
 
     event.target.parentNode.disabled = true;
     
@@ -37,10 +37,10 @@ export class FeedbackPage {
       app : this.service.app.app_name,
       text : this.text.value
     }).then(()=>{
-      this.toast.showToast('Your message sended.');
+      this.toast.showToast(this.service.dic.MessageSended);
       event.target.parentNode.disabled = false;
     }).catch(()=>{
-      this.toast.showToast('Your message didn`t send! Some error occur!');
+      this.toast.showToast(this.service.dic.MessageError);
       event.target.parentNode.disabled = false;
     })
     

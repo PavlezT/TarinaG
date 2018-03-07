@@ -8,7 +8,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import * as consts from './consts';
 import * as transen from '../assets/dictionary/en';
 import * as transfi from '../assets/dictionary/fi';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class GeneralService {

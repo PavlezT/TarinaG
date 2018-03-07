@@ -1,5 +1,11 @@
 tabs-page {
 
+    .padding{
+        .tabbar{
+            padding-bottom:20px;
+        }
+    }
+
     #custom-overlay{
         height: 100%;
         background-color: rgba(200,200,200,0.8);

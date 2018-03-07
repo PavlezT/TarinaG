@@ -33,5 +33,10 @@ export var fi = {
     "Name" : "Nimi",
     "Email" : "Sähköposti",
     "Message" : "Viesti",
-    "Send" : "Lähettää"
+    "Send" : "Lähettää",
+    "Back" : "Takaisin",
+    "FillFields" : "Täytä kaikki kentät",
+    "EnterValidEmail" : "Anna voimassa oleva sähköposti",
+    "MessageSended" : "Viestisi lähetettiin.",
+    "MessageError" : "Viestisi ei lähetetty! Joitakin virheitä esiintyy."
 }

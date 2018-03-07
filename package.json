@@ -23,6 +23,7 @@
         "@ionic-native/app-version": "^4.5.3",
         "@ionic-native/badge": "^4.5.3",
         "@ionic-native/core": "3.12.1",
+        "@ionic-native/device": "^4.5.3",
         "@ionic-native/fcm": "^4.5.3",
         "@ionic-native/file": "^4.5.3",
         "@ionic-native/file-transfer": "^4.5.3",

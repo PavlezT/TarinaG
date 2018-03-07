@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, Config } from 'ionic-angular';
 
 import { AboutPage } from '../about/about';
 import { AccountsPage } from '../accounts/accounts';
@@ -16,7 +16,10 @@ export class SettingsPage {
   accounts: Array<{ name: string, icon: string, component: any }>;
   helps: Array<{ name: string, icon: string, component: any }>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, @Inject(GeneralService) public service : GeneralService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
+    @Inject(GeneralService) public service : GeneralService, public config : Config)
+  {
+    this.config.set('backButtonText', this.service.dic.Back);
     this.setAccountItems();
     this.setHelpItems();
   }
@@ -46,13 +49,13 @@ export class SettingsPage {
   }
 
   openNotificationSettings() {
-    let modal = this.modalCtrl.create(NotificationsPage);
-    modal.present();
+    this.navCtrl.push(NotificationsPage);
+    // modal.present();
   }
 
   openHelpItem(h) {
-    let modal = this.modalCtrl.create(h.component);
-    modal.present();
+    this.navCtrl.push(h.component);
+    // modal.present();
   }
 
 }
