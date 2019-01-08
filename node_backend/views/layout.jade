@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/jquery-ui.min.css')
+    script(rel="text/javascript", src="/javascripts/jquery/jquery-3.2.1.min.js")
+    script(rel="text/javascript", src="/javascripts/jquery/jquery-ui.min.js")
+  body
+    div(id="layout_div")
+      div(class="layout_header")
+        span="Club"
+      ul(class="head_list")
+        if admin == true
+          li
+            a(href='/users') Users
+          li
+            a(href='/roles') Roles
+          li
+            a(href='/apps') Apps
+          //- li
+          //-   a(href='/links') Links
+          li
+            a(href='/notifications') Notifications
+        li
+          a(href='/message') Direct Messages
+        li
+          a(href='/analytics') Analytics
+    div(id="content_layout")
+      div(class="layout_header")
+        div(class="user_profile")
+          img(src="/images/user.png")
+          div(id="user_menu")
+            p
+              a(href="/profile")="Edit Profile"
+            p
+              a(href="/log_out")="Log Out"
+      div(class="main-content")
+        block content
+    script(rel="text/javascript")="$('.user_profile').click(function(){$('#user_menu').toggle();})"

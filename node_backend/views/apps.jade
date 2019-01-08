@@ -1,0 +1,127 @@
+extends layout
+
+block content
+  script(rel="text/javascript", src="/javascripts/apps.js")
+  link(rel='stylesheet', href='/stylesheets/apps.css')
+  h1= title
+  div(id="message_container")
+    table
+      tr(class="user_row")
+        td
+        td App Id
+        td App Name
+        td Owner Role
+        td Tee Times page url
+        td Latitude
+        td Longitude
+        td OpenWeather Api Key
+      each app, index in apps
+        if index%2 == 0
+          tr(class="user_row live_users light_row")
+            td
+              input(type="radio",name="radio-1",data=app)
+            td= app.app_name
+            td= app.name
+            td= app.role
+            td= app.teetimes_href
+            td= app.latitude
+            td= app.longitude
+            td= app.weather_apikey
+        else
+          tr(class="user_row live_users")
+            td
+              input(type="radio",name="radio-1",data=app)
+            td= app.app_name
+            td= app.name
+            td= app.role
+            td= app.teetimes_href
+            td= app.latitude
+            td= app.longitude
+            td= app.weather_apikey
+    br
+    button(id="create",class="ui-button ui-widget ui-corner-all main_buttom") Create
+    button(id="edit",class="ui-button ui-widget ui-corner-all main_buttom") Edit
+    button(id="delete",class="ui-button ui-widget ui-corner-all main_buttom") Delete
+
+  div(id="create_dialog",class="my_dialog",title="Create new role")
+    span= "App Id"
+    input(id="create_app_name",class="modal_input",placeholder="com.test.app")
+    span= "App Name"
+    input(id="create_name",class="modal_input",placeholder="Apps Name")
+    span="TeeTimes page url"
+    input(id="create_teetimes",class="modal_input",placeholder="https://teetimes.page")
+    span="Latitude"
+    input(id="create_lat",class="modal_input",placeholder="50.32")
+    span="Longitude"
+    input(id="create_long",class="modal_input",placeholder="-12.44")
+    span="OpenWeather Api Key"
+    input(id="create_weather_apikey",class="modal_input",placeholder="43434...")
+    span= "Select App`s Owner Role"
+    select(id="select_create_role")
+      option(value="0")= "none"
+      each role, index in roles
+        option(value=role.id)= role.name
+    br  
+    button(id="cancel_create",class="modal_button")="Cancel"
+    button(id="create_user",class="modal_button")="Create & Edit Visuals"
+    div(id="create_progressbar")
+    div(id="create_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Role added!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="create_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="create_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Role not added"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="edit_dialog",class="my_dialog")
+    span= "App Id"
+    input(id="edit_app_name",class="modal_input",placeholder="com.test.app")
+    span= "App Name"
+    input(id="edit_name",class="modal_input",placeholder="App Name")
+    span="TeeTimes page url"
+    input(id="edit_teetimes",class="modal_input",placeholder="https://teetimes.page")
+    span="Latitude"
+    input(id="edit_lat",class="modal_input",placeholder="50.32")
+    span="Longitude"
+    input(id="edit_long",class="modal_input",placeholder="-12.44")
+    span="OpenWeather Api Key"
+    input(id="edit_weather_apikey",class="modal_input",placeholder="43434...")
+    span= "Select App`s Owner Role"
+    select(id="select_edit_role")
+      option(value="0")= "none"
+      each role, index in roles
+        option(value=role.id)= role.name
+    br  
+    button(id="cancel_edit",class="modal_button")="Cancel"
+    button(id="edit_user",class="modal_button")="Save & Edit Visuals"
+    div(id="edit_progressbar")
+    div(id="edit_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "App data changed!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. App data not changed"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="delete_dialog",class="my_dialog")
+    span
+      | Are you sure you want to permanently delete app? 
+      br
+      | All users with this app will have problems with accessing this site.
+    br
+    button(id="delete_user_button",class="modal_button")="Yes"
+    button(id="cancel_delete",class="modal_button")="No"
+    div(id="delete_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Role data not changed"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")

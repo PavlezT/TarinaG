@@ -1,0 +1,187 @@
+extends layout
+
+block content
+  link(rel='stylesheet',href='/stylesheets/apps.css')
+  link(rel="stylesheet",href="/stylesheets/colorpicker.css",type="text/css")
+  script(type="text/javascript",src="/javascripts/jquery/colorpicker.js")
+  script(rel="text/javascript",src="/javascripts/apppartners.js")
+  h1= title
+  div(id="message_container")
+    div(class="image_container")
+      div(class="inner_image")
+        div(id="logo",style="background-color: transparent; border: 0px;cursor:default;")
+          img(src=app.logourl)
+        div(id="buttons_list")
+          table(id="tabs_list")
+            tr
+              each tab in tabs
+                td(class="list_button")
+                  button(id=tab.id,data=tab)
+                    span=tab.name
+          each tab in tabs
+            div(class="icons_list",id="icons_"+tab.id)
+              each icon in icons
+                if icon.tabid == tab.id
+                  div(data=icon,class="icons_list_item")
+                    img(src=icon.logourl)
+        img(id="phone",src='/images/app_view.png')
+  h3 Double click on tab to open Edit Modal
+  a(id="splash_screen",href="/apps/appsplash/"+app.id, class="ui-button ui-widget ui-corner-all") Change Splash Screen
+  a(id="splash_screen",href="/apps/appview/"+app.id, class="ui-button ui-widget ui-corner-all") Change Home Screen
+  a(id="contacts_screen",href="/apps/appcontact/"+app.id, class="ui-button ui-widget ui-corner-all") Change Contacts Screen
+  a(id="about_screen",href="/apps/appabout/"+app.id, class="ui-button ui-widget ui-corner-all") Change App About Information
+  button(id="create",class="ui-button ui-widget ui-corner-all main_buttom") Add new tab
+  button(id="create_new_partner",class="ui-button ui-widget ui-corner-all main_buttom") Add new partner
+  input(id="appid",type="hidden",value=app.id)
+  div(id="create_dialog",class="my_dialog",title="Create new tab")
+    span= "Tab text"
+    input(id="create_name",class="modal_input",placeholder="Tab text")
+    span= "Select order"
+    select(id="create_order")
+      option(value=1)="1"
+    br
+    button(id="create_button",class="modal_button")="Create"
+    button(id="create_cancel",class="modal_button")="Cancel"
+    div(id="create_progressbar")
+    div(id="create_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Tab added!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="create_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="create_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Tab not added"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="edit_dialog",class="my_dialog")
+    span= "Tab text"
+    input(id="edit_name",class="modal_input",placeholder="Button text")
+    span= "Select order"
+    select(id="edit_order")
+      - var n = 0
+      while n < tabs.length
+        option(value=++n)=n
+    br
+    button(id="edit_button",class="modal_button")="Save"
+    button(id="edit_cancel",class="modal_button")="Cancel"
+    button(id="edit_delete",class="modal_button")="Delete"
+    div(id="edit_progressbar")
+    div(id="edit_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Tab data changed!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Tab data not changed"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+  
+  div(id="delete_dialog",class="my_dialog")
+    span
+      | Are you sure you want to permanently delete this tab?
+      | All connected Partners will disappear
+    br
+    button(id="delete_user_button",class="modal_button")="Yes"
+    button(id="cancel_delete",class="modal_button")="No"
+    div(id="delete_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Tab deleted!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="delete_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Tab data not changed"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="create_icon",class="my_dialog",title="Add new Partner")
+    span= "Partner name"
+    input(id="create_icon_name",class="modal_input",placeholder="Partner name")
+    span= "Partner link"
+    input(id="create_icon_link",class="modal_input",placeholder="Partner link")
+    span= "Select partner logo"
+    input(id="create_icon_logo",class="modal_input_img",type="image",src="/", width="40",readonly)= " "
+    span= "Select tab"
+    select(id="create_icon_tab",class="modal_input")
+      each tab in tabs
+        option(value=tab.id)= tab.name
+    br
+    button(id="create_icon_button",class="modal_button")="Create"
+    button(id="create_cancel_icon",class="modal_button")="Cancel"
+    div(id="create_icon_progressbar")
+    div(id="create_icon_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Partner added!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="create_icon_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="create_icon_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Partner not added"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="edit_icon_dialog",class="my_dialog")
+    span= "Partner name"
+    input(id="edit_icon_name",class="modal_input",placeholder="Partner name")
+    span= "Partner link"
+    input(id="edit_icon_link",class="modal_input",placeholder="Partner link")
+    span= "Select partner logo"
+    input(id="edit_icon_logo",class="modal_input_img",type="image",src="/", width="40",readonly)= " "
+    span= "Select tab"
+    select(id="edit_icon_tab",class="modal_input")
+      each tab in tabs
+        option(value=tab.id)= tab.name
+    span= "Select order"
+    select(id="edit_icon_order")
+        option(value=0)=0
+    br
+    button(id="edit_icon",class="modal_button")="Save"
+    button(id="edit_icon_cancel",class="modal_button")="Cancel"
+    button(id="edit_icon_delete",class="modal_button")="Delete"
+    div(id="edit_icon_progressbar")
+    div(id="edit_icon_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Partner data changed!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_icon_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_icon_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Partner data not changed"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="delete_icon",class="my_dialog")
+    span
+      | Are you sure you want to permanently delete this Partner?
+    br
+    button(id="delete_icon_button",class="modal_button")="Yes"
+    button(id="cancel_icon_delete",class="modal_button")="No"
+    div(id="delete_icon_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Partner deleted!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="delete_icon_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Partner data not changed"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="select_image",class="my_dialog")
+    span(id="image_name")
+    div(id="image_progressbar")
+    div(id="select_image_container")
+    br
+    button(id="save_image_select",class="modal_button")="Add"
+    button(id="cancel_image_select",class="modal_button")="Cancel"
+    div(class="new_image_select")
+      span="Add new image"
+      input(id="new_image_select",type="file",class="modal_button")="Add new image"
+      button(id="new_image_upload",class="modal_button")="Upload"
+  

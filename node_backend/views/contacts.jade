@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  link(rel='stylesheet',href='/stylesheets/apps.css')
+  script(type="text/javascript",src="/ckeditor/ckeditor.js")
+  h1= title
+  div(id="message_container")
+    form(class="image_container",method="POST",action="/apps/appcontact/"+app.id)
+        textarea(id="editor",name="text", cols="30", rows="20")= (contact ? contact.text : '')
+        input(type="submit",style="display:none;")
+        if contact
+            input(name="id",style="display:none;",value=contact.id)
+            input(name="appid",style="display:none;",value=app.id)
+  div(style="margin-top:20px;")
+    a(id="splash_screen",href="/apps/appsplash/"+app.id, class="ui-button ui-widget ui-corner-all") Change Splash Screen
+    a(id="home_screen",href="/apps/appview/"+app.id, class="ui-button ui-widget ui-corner-all") Change Home Screen
+    a(id="splash_screen",href="/apps/apppartners/"+app.id, class="ui-button ui-widget ui-corner-all") Change Partners Screen
+    a(id="about_screen",href="/apps/appabout/"+app.id, class="ui-button ui-widget ui-corner-all") Change App About Information
+    button(id="save",class="ui-button ui-widget ui-corner-all main_buttom") Save
+  input(id="appid",type="hidden",value=app.id)
+  script 
+      | CKEDITOR.replace('editor');
+      | $('#save').click(function(){
+      |    $('.image_container > input[type="submit"]').click();
+      | })
+
+  

@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  script(rel="text/javascript", src="/javascripts/links.js")
+  h1= title
+  div(id="links_titles")
+    h2(class="title_text_left")= "Select Services"
+    h2(class="title_text_right")= "Drag & Drop onto Layout"
+  div(id="content_links")
+    div(class="parts")
+      div(id="phone_back")
+        div(class="phone")
+          ul(id="sortable")
+            li(class="ui-state-default phone_link_item")="Item 1"
+    div(class="dots")
+    div(class="parts")
+      div(id="links_container")
+        div(class="draggable" id="Instagram")
+          img(src="/images/instagram.png")
+        div(class="draggable" id="Facebook")
+          img(src="/images/facebook.png")
+        div(class="draggable" id="Twitter")
+          img(src="/images/twitter.jpg")
+        div(class="draggable" id="YouTube")
+          img(src="/images/youtube.png")
+        div(class="draggable" id="test")
+          img(src="/images/instagram.png")
+  button(id="send",style="margin-top:15px;")="Save"
+
+  div(id="dialog",title="Add RSS Feed")
+    span= "Name"
+    input(id="name",class="modal_input",placeholder="name")
+    span= "Link"
+    input(id="link",class="modal_input",placeholder="link")
+    span= "Notification"
+    select(id="notification")
+      each feed, i in notifications
+        option(value=i) #{feed.name}
+    br   
+    button(id="add",class="modal_button")="Add"
+    button(id="cancel",class="modal_button")="Cancel"
+    button(id="delete",class="modal_button")="Delete"
+    div(id="progressbar")
+    div(id="okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Feed added!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Feed not added"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+

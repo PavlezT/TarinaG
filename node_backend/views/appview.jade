@@ -1,0 +1,224 @@
+extends layout
+
+block content
+  link(rel='stylesheet',href='/stylesheets/apps.css')
+  link(rel="stylesheet",href="/stylesheets/colorpicker.css",type="text/css")
+  script(type="text/javascript",src="/javascripts/jquery/colorpicker.js")
+  script(rel="text/javascript",src="/javascripts/appview.js")
+  h1= title
+  div(id="message_container")
+    div(class="image_container")
+      div(class="inner_image")
+        button(id="logo")
+          img(src=app.logourl)
+        div(id="buttons_list",data-app=app,style=(app.back_color && app.back_color.length > 0 ? "background-color:"+app.back_color+";" : "")+( app.back_image && app.back_image.length > 0 ? "background-image:url('"+app.back_image+"');" : "" ) )
+          each button in buttons
+            button(id=button.id,class="list_button",data=button,style=button.style)
+              img(src=button.logourl)
+              div
+                span=button.text
+        img(id="phone",src='/images/app_view.png')
+  div(style="margin-top:20px")
+    a(id="splash_screen",href="/apps/appsplash/"+app.id, class="ui-button ui-widget ui-corner-all") Change Splash Screen
+    a(id="splash_screen",href="/apps/apppartners/"+app.id, class="ui-button ui-widget ui-corner-all") Change Partners Screen
+    a(id="contacts_screen",href="/apps/appcontact/"+app.id, class="ui-button ui-widget ui-corner-all") Change Contacts Screen
+    a(id="about_screen",href="/apps/appabout/"+app.id, class="ui-button ui-widget ui-corner-all") Change App About Information
+    button(id="create",class="ui-button ui-widget ui-corner-all main_buttom") Add new button
+    button(id="edit_app",class="ui-button ui-widget ui-corner-all main_buttom") Edit app background
+  //- button(id="cancel",class="ui-button ui-widget ui-corner-all main_buttom") Cancel
+  //- button(id="save",class="ui-button ui-widget ui-corner-all main_buttom") Save
+  input(id="appid",type="hidden",value=app.id)
+  div(id="create_dialog",class="my_dialog",title="Create new button")
+    span= "Button text (English)"
+    input(id="create_name",class="modal_input",placeholder="Button text")
+    span= "Button text (Finnish)"
+    input(id="create_name_fin",class="modal_input",placeholder="Button text")
+    span= "Select text color"
+    input(id="create_text_color")
+    span= "Select Backgroung Color"
+    input(id="create_back_color")
+    span= "Button link"
+    input(id="create_link",class="modal_input",placeholder="Button link")
+    span= "Select Notification"
+    select(id="create_notification")
+      option(value="0")= "none"
+      each notif, index in notifications
+        option(value=notif.id)= notif.name
+    span= "Select button logo"
+    input(id="create_logo",class="modal_input_img",type="image",src="/", width="40",readonly)= " "
+    br
+    div
+      input(id="create_border",type="checkbox")
+      span="Show button border"
+    span= "Select button border color"
+    input(id="create_border_color")
+    span= "Select border width"
+    select(id="create_border_width")
+      option(value="1px")="1px"
+      option(value="2px")="2px"
+      option(value="3px")="3px"
+      option(value="4px")="4px"
+      option(value="5px")="5px"
+      option(value="6px")="6px"
+      option(value="7px")="7px"
+      option(value="8px")="8px"
+      option(value="9px")="9px"
+      option(value="10px")="10px"
+      option(value="11px")="11px"
+      option(value="12px")="12px"
+      option(value="13px")="13px"
+      option(value="14px")="14px"
+      option(value="15px")="15px"
+    span= "Select border radius"
+    select(id="create_border_radius")
+      - var n = 0
+      while n < 60
+        option(value=(''+(++n) + 'px'))= (''+n +'px')
+    span="Turn on button shadow"
+    input(id="create_box_shadow",type="checkbox")
+    span="Turn on button animation"
+    input(id="create_animation",type="checkbox")
+    span= "Select notification icon color"
+    input(id="create_notif_color")
+    span= "Select order"
+    select(id="create_order")
+      option(value=1)="1"
+    br
+    button(id="create_button",class="modal_button")="Create"
+    button(id="create_cancel",class="modal_button")="Cancel"
+    div(id="create_progressbar")
+    div(id="create_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Button added!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="create_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="create_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Button not added"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="edit_dialog",class="my_dialog")
+    span= "Button text (English)"
+    input(id="edit_name",class="modal_input",placeholder="Button text")
+    span= "Button text (Finnish)"
+    input(id="edit_name_fin",class="modal_input",placeholder="Button text")
+    span= "Select text color"
+    input(id="edit_text_color")
+    span= "Select Backgroung Color"
+    input(id="edit_back_color")
+    span= "Button link"
+    input(id="edit_link",class="modal_input",placeholder="Button link")
+    span= "Select Notification"
+    select(id="edit_notification")
+      option(value="0")= "none"
+      each notif, index in notifications
+        option(value=notif.id)= notif.name
+    span(id="edit_logo_name")= "Button logo: "
+    input(id="edit_logo",class="modal_input_img",type="image",src="", width="40")=" "
+    br
+    div
+      input(id="edit_border",type="checkbox")
+      span="Show button border"
+    span= "Select button border color"
+    input(id="edit_border_color")
+    span= "Select border width"
+    select(id="edit_border_width")
+      option(value="1px")="1px"
+      option(value="2px")="2px"
+      option(value="3px")="3px"
+      option(value="4px")="4px"
+      option(value="5px")="5px"
+      option(value="6px")="6px"
+      option(value="7px")="7px"
+      option(value="8px")="8px"
+      option(value="9px")="9px"
+      option(value="10px")="10px"
+      option(value="11px")="11px"
+      option(value="12px")="12px"
+      option(value="13px")="13px"
+      option(value="14px")="14px"
+      option(value="15px")="15px"
+    span= "Select border radius"
+    select(id="edit_border_radius")
+      - var n = 0
+      while n < 60
+        option(value=(''+(++n) + 'px'))= (''+n +'px')
+    span="Turn on button shadow"
+    input(id="edit_box_shadow",type="checkbox")
+    span="Turn on button animation"
+    input(id="edit_animation",type="checkbox")
+    span= "Select notification icon color"
+    input(id="edit_notif_color")
+    span= "Select order"
+    select(id="edit_order")
+      - var n = 0
+      while n < buttons.length
+        option(value=++n)=n
+    br
+    button(id="edit_button",class="modal_button")="Save"
+    button(id="edit_cancel",class="modal_button")="Cancel"
+    button(id="edit_delete",class="modal_button")="Delete"
+    div(id="edit_progressbar")
+    div(id="edit_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Button data changed!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Button data not changed"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+  
+  div(id="edit_app_dialog",class="my_dialog")
+    span="Use background image?"
+    input(id="edit_back_image_check",type="checkbox")
+    span(id="edit_app_logo_name")= "App background image: "
+    input(id="edit_app_logo",class="modal_input_img",type="image",src="", width="40")=" "
+    span= "Select app background color"
+    input(id="edit_app_back_color")
+    br
+    button(id="edit_app_button",class="modal_button")="Save"
+    button(id="edit_app_cancel",class="modal_button")="Cancel"
+    div(id="edit_app_progressbar")
+    div(id="edit_app_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Button data changed!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_app_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_app_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Button data not changed"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="delete_dialog",class="my_dialog")
+    span
+      | Are you sure you want to permanently delete this app button? 
+    br
+    button(id="delete_user_button",class="modal_button")="Yes"
+    button(id="cancel_delete",class="modal_button")="No"
+    div(id="delete_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Role data not changed"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+  
+  div(id="select_image",class="my_dialog")
+    span(id="image_name")
+    div(id="image_progressbar")
+    div(id="select_image_container")
+    br
+    button(id="save_image_select",class="modal_button")="Add"
+    button(id="cancel_image_select",class="modal_button")="Cancel"
+    div(class="new_image_select")
+      span="Add new image"
+      input(id="new_image_select",type="file",class="modal_button")="Add new image"
+      button(id="new_image_upload",class="modal_button")="Upload"
+  

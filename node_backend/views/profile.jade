@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/profile.css')
+  h1= "Hello "+user.name
+  form(id="message_container",method="POST",action="/profile/edit")
+    div= "Name"
+    input(id="edit_name",name="name",class="modal_input",placeholder="User Name", value=user.name)
+    div= "Email"
+    input(id="edit_email",name="email",class="modal_input",placeholder="example@example.com", value=user.email)
+    div= "Change Password"
+    input(id="old_password",name="old_pass",,type="password",class="modal_input",placeholder="Old Password")
+    input(id="new_password",name="new_pass",type="password",class="modal_input",placeholder="New Password")
+    input(id="new_copy_password",name="copy_pass",type="password",class="modal_input",placeholder="Repeat new Password")
+    br  
+    button(id="edit_user",class="modal_button",type="submit")="Save"
+    if(action == 'true')
+      div(id="edit_okey_info",class="ui-widget")
+        div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+          p= "User data changed!"
+            span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    if(action == 'fill')
+      div(id="edit_fill_fields",class="ui-widget")
+        div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+          p= "Not all fields are filled out!"
+            span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    if(action == 'false')
+      div(id="edit_error_info",class="ui-widget")
+        div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+          p= "Error occur. User data not changed"
+            span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+
+    
+    

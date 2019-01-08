@@ -1,0 +1,90 @@
+extends layout
+
+block content
+  script(rel="text/javacript", src="/javascripts/notifications.js")
+  link(rel='stylesheet', href='/stylesheets/users.css')
+  h1= title
+  div(id="message_container")
+    span="Select app"
+    select(id="selected_app")
+      each item in apps
+        option(value=item.id)=item.name
+    table
+      tr(class="user_row")
+        td
+        td Name
+        td Address
+      each val, index in notifications
+        fieldset
+        if index%2 == 0
+          tr(class="user_row live_users light_row")
+            td
+              input(type="radio",name="radio-1",data=val)
+            td= val.name
+            td= val.link
+        else
+          tr(class="user_row live_users")
+            td
+              input(type="radio",name="radio-1",data=val)
+            td= val.name
+            td= val.link
+        fieldset
+    br  
+    button(id="create",class="ui-button ui-widget ui-corner-all main_buttom")="Create"
+    button(id="edit",class="ui-button ui-widget ui-corner-all main_buttom") Edit
+    button(id="delete",class="ui-button ui-widget ui-corner-all main_buttom") Delete
+
+  div(id="dialog",title="Add RSS Feed")
+    span= "Name"
+    input(id="name",class="modal_input",placeholder="name")
+    span= "Link to Feed"
+    input(id="link",class="modal_input",placeholder="link")
+    br   
+    button(id="add",class="modal_button")="Add"
+    button(id="cancel",class="modal_button")="Cancel"
+    div(id="progressbar")
+    div(id="okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Feed added!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Feed not added"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="edit_dialog",title="Add RSS Feed")
+    span= "Name"
+    input(id="edit_name",class="modal_input",placeholder="name")
+    span= "Link to Feed"
+    input(id="edit_link",class="modal_input",placeholder="link")
+    br   
+    button(id="edit_yes",class="modal_button")="Edit"
+    button(id="cancel_edit",class="modal_button")="Cancel"
+    div(id="progressbar_edit")
+    div(id="edit_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Feed data saved!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Feed not added"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="delete_dialog",title="Delete notification")
+    span= "Delete permanently this notification?"
+    br
+    button(id="delete_notif",class="modal_button")="Delete"
+    button(id="delete_cancel",class="modal_button")="Cancel"
+    div(id="delete_progressbar")
+    div(id="delete_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Feed not deleted"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")

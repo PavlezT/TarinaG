@@ -1,0 +1,118 @@
+extends layout
+
+block content
+  script(rel="text/javascript", src="/javascripts/message.js")
+  script(rel="text/javascript", src="/javascripts/jquery/jquery.mousewheel.js")
+  script(rel="text/javascript", src="/javascripts/jquery/globalize.js")
+  script(rel="text/javascript", src="/javascripts/jquery/globalize.culture.de-DE.js")
+  h1= title
+  if admin == true
+    div(class="apps_to_message")
+      h3="Choose App"
+      select(id="apps_selected")
+        each app in apps
+          option(value=app.id)= app.name
+  else
+    if apps && apps[0]
+      input(type="hidden",id="apps_selected",value=apps[0].id)
+      h3= apps[0].name
+    else
+      h3="There is no connected app for you"
+  br
+  span= "Current time is: "
+  span(id="current_time")
+  br
+  br
+  div(id="message_container")
+    textarea(id="textarea",draggable="false",rows="15")
+    br
+    fieldset
+      label(for="checkbox-1")= "Schedule"
+      input(type="checkbox",name="checkbox-1",id="checkbox-1")
+    fieldset
+      label(for="spinner")= "Time "
+      input(id="spinner",name="spinner",value="14:00")
+    span= "Date:"
+    input(type="text",id="datepicker")
+    br
+    button(id="send")="Send"
+    br
+    div(id="okey_message",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Message is send"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="check_message",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Check input values"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="error_message",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Message is not send"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+  
+  div(id="messages_list")
+    h2="Scheduled Messages"
+    table
+      tr(class="user_row")
+        td
+        if admin == true
+          td App Name
+        td Scheduled Time
+      each val, index in messages
+        if index%2 == 0
+          tr(class="user_row live_users light_row")
+            td
+              input(type="radio",name="radio-1",data=val)
+            if admin == true
+              td= val.appname
+            td(class="schaduled_time")= val.date
+        else
+          tr(class="user_row live_users")
+            td
+              input(type="radio",name="radio-1",data=val)
+            if admin == true
+              td= val.appname
+            td(class="schaduled_time")= val.date
+    br
+    button(id="edit",class="main_buttom")="Edit"
+    button(id="delete",class="main_buttom")="Delete"
+
+  div(id="dialog_edit")
+    span= "Message Text"
+    br
+    textarea(id="edit_textarea",draggable="false",rows="15")
+    br
+    span= "Date: "
+    span(id="edit_date")
+    //- input(id="link",class="modal_input",placeholder="link")
+    br
+    span= "Added by user:"
+    span(id="edit_user") 
+    span(id="edit_email")
+    br  
+    button(id="save_edit",class="modal_button")="Add"
+    button(id="cancel_edit",class="modal_button")="Cancel"
+    div(id="edit_progressbar")
+    div(id="edit_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Message edited!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Message not added"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+  
+  div(id="dialog_delete")
+    span= "Delete permanently this message?"
+    br
+    button(id="delete_notif",class="modal_button")="Delete"
+    button(id="delete_cancel",class="modal_button")="Cancel"
+    div(id="delete_progressbar")
+    div(id="delete_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Message not deleted"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")

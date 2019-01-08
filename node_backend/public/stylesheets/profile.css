@@ -1,0 +1,11 @@
+
+.modal_input{
+    padding : 5px;
+    font-size: 14px;
+    margin : 5px;
+}
+
+#message_container > div {
+    padding: 5px;
+    margin-top: 5px;
+}

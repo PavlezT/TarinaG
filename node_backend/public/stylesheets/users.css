@@ -1,0 +1,39 @@
+
+.user_row {
+    background-color: rgba(200,200,200,0.5);
+}
+
+.light_row {
+    background-color: rgba(100,100,100,0.5);
+}
+
+.user_row > td{
+    padding : 10px;
+}
+
+.ui-button{
+    margin-right : 10px;
+}
+
+.my_dialog{
+    display: none;
+}
+
+.modal_input{
+    padding: 6px;
+    margin: 5px;
+    width: 90%;
+}
+
+.create_pass > .modal_input{
+    max-width: 50%;
+}
+
+.my_dialog > span {
+    display: block;
+    margin-top: 10px;
+}
+
+#edit_dialog{
+    display: none;
+}

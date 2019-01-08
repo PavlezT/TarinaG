@@ -1,0 +1,31 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.ui-widget-overlay{
+  opacity: 0.5 !important;
+}
+
+.container{
+  position: relative;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+  width: 50%;
+}
+#login_form{
+  font-size : 20px;
+}
+
+#login_form > input{
+  margin-bottom : 20px;
+  font-size : 20px;
+  padding : 10px;
+  width: 40%;
+}

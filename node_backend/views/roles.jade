@@ -1,0 +1,108 @@
+extends layout
+
+block content
+  script(rel="text/javascript", src="/javascripts/roles.js")
+  link(rel='stylesheet', href='/stylesheets/users.css')
+  h1= title
+  div(id="message_container")
+    table
+      tr(class="user_row")
+        td
+        td Name
+        td Type
+      each role, index in roles
+        fieldset
+        if index%2 == 0
+          tr(class="user_row live_users light_row")
+            td
+              input(type="radio",name="radio-1",data=role)
+            td= role.name
+            td= role.type
+        else
+          tr(class="user_row live_users")
+            td
+              input(type="radio",name="radio-1",data=role)
+            td= role.name
+            td= role.type
+        fieldset
+    br
+    button(id="create",class="ui-button ui-widget ui-corner-all main_buttom") Create
+    button(id="edit",class="ui-button ui-widget ui-corner-all main_buttom") Edit
+    button(id="delete",class="ui-button ui-widget ui-corner-all main_buttom") Delete
+
+  div(id="create_dialog",class="my_dialog",title="Create new role")
+    span= "Name"
+    input(id="create_name",class="modal_input",placeholder="User Name")
+    span= "Select type"
+    select(id="select_create_role")
+      option(value="User")= "User"
+      option(value="Administrator")= "Administrator"
+      //- option(value="0")= "none"
+      //- each role, index in roles
+      //-   option(value=role.id)= role.name
+    br  
+    button(id="create_user",class="modal_button")="Create"
+    button(id="cancel_create",class="modal_button")="Cancel"
+    div(id="create_progressbar")
+    div(id="create_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Role added!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="create_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="create_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Role not added"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="edit_dialog",class="my_dialog")
+    span= "Name"
+    input(id="edit_name",class="modal_input",placeholder="Role Name")
+    span= "Select type"
+    select(id="select_edit_role")
+      option(value="User")= "User"
+      option(value="Administrator")= "Administrator"
+      //- option(value="0")= "none"
+      //- each role, index in roles
+      //-   option(value=role.id)= role.name
+    br  
+    button(id="edit_user",class="modal_button")="Save"
+    button(id="cancel_edit",class="modal_button")="Cancel"
+    div(id="edit_progressbar")
+    div(id="edit_okey_info",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Role data changed!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_fill_fields",class="ui-widget")
+      div(class="ui-state-highlight ui-corner-all",style="margin-top: 20px; padding: 0 .7em;")
+        p= "Not all fields are filled out!"
+          span(class="ui-icon ui-icon-info",style="float: left; margin-right: .3em;")
+    div(id="edit_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Role data not changed"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+  div(id="delete_dialog",class="my_dialog")
+    span
+      | Are you sure you want to permanently delete role: '
+      strong(class="delete_user_name")
+      |'? 
+      br
+      | All users with this role will have problems with accessing this site.
+      br
+      | Please change roles of all users with '
+      strong(class="delete_user_name")
+      |' role and then delete this role.
+    br
+    button(id="delete_user_button",class="modal_button")="Yes"
+    button(id="cancel_delete",class="modal_button")="No"
+    div(id="delete_error_info",class="ui-widget")
+      div(class="ui-state-error ui-corner-all",style="padding: 0 .7em;")
+        p= "Error occur. Role data not changed"
+          span(class="ui-icon ui-icon-alert",style="float: left; margin-right: .3em;")
+
+
+    
+    

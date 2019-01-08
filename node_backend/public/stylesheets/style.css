@@ -1,0 +1,307 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.ui-widget-overlay{
+  opacity: 0.5 !important;
+}
+
+#layout_div{
+  display: inline-block;
+  width:15%;
+  height:100%;
+  border-right: 4px solid black;
+  position: fixed;
+  vertical-align: top;
+}
+
+#content_layout{
+  display: inline-block;
+  position: relative;
+  width: 84%;
+  height: 100%;
+  margin-left: 15%;
+  overflow: scroll;
+  padding-bottom: 20px;
+}
+
+#content_layout > .layout_header{
+  position: fixed;
+  background-color: white;
+  width: 85%;
+  border-left:4px solid black;
+}
+
+.layout_header{
+  height: 80px;
+  padding-top: 10px;
+  text-transform: uppercase;
+  width: 100%;
+  font-size: 55px;
+  font-weight: bold;
+  text-align: center;
+  z-index : 100;
+  border-bottom: 4px solid black;
+}
+
+.layout_header > .user_profile{ /* > img*/
+  width : 130px;
+  float : right;
+  margin-right : 30px;
+  cursor : pointer;
+  font-size: 14px;
+}
+
+#user_menu{
+  display: none;
+  background-color: white;
+  padding: 10px;
+  border : 4px solid black;
+}
+
+#user_menu > p {
+  margin-bottom:20px;
+}
+
+.user_profile > img {
+  width: 60px;
+}
+
+.main-content{
+  padding-left: 20px;
+  margin-top: 100px;
+}
+
+.head_list{
+  list-style: none;
+  /* background-color: grey; */
+}
+
+.head_list > li {
+  /* display: inline-block; */
+  margin-right : 20px;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.head_list > li > a {
+  text-decoration: none;
+}
+
+.notif_list{
+  /* list-style-type:none; */
+}
+.notif_list > li {
+  position: relative;
+  font-size: 20px;
+}
+.notif_link{
+  color:grey;
+  font-size: 15px;
+}
+.delete_icon{
+  color:red;
+  position: absolute;
+  left:0px;
+  display: inline-block;
+  margin-left: -50px;
+  cursor: pointer;
+  /* background-color: green; */
+}
+.delete_icon > span:before{
+  content: "x";
+}
+
+#dialog, #delete_dialog{
+  display: none;
+}
+
+#delete_name, #delete_link{
+  color:grey;
+}
+
+#dialog > span{
+  margin-bottom:5px;
+  margin-top:5px;
+  display: block;
+}
+
+.modal_input{
+  width:100%;
+  /* font-size: 15px !important; */
+}
+.modal_button{
+  margin-top:10px;
+  margin-right: 10px;
+  padding:10px;
+}
+
+#okey_info{
+  display: none;
+}
+
+#add_feed, #send, #create, #reset,#edit, #edit_app, #delete{
+  box-shadow: 5px 5px 5px grey;
+  -webkit-box-shadow: 5px 5px 5px grey;
+  -moz-box-shadow:    5px 5px 5px grey;
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  margin-right : 15px;
+}
+
+#message_container{
+  width:50%;
+  position: relative;
+  display: inline-block;
+}
+#message_container > span{
+  margin-left:15px;
+  padding: 5px;
+}
+#message_container > fieldset{
+  width: auto;
+  display: inline-block;
+  border:none !important;
+}
+#message_container > img.ui-datepicker-trigger{
+  margin-left:10px;
+}
+#okey_message, #error_message, #check_message, #dialog_edit, #dialog_delete{
+  display:none;
+}
+#textarea, #edit_textarea{
+  width:100%;
+}
+
+#messages_list {
+  display: inline-block;
+  position: absolute;
+  margin-left: 30px;
+  margin-top: -60px;
+}
+
+#content_links{
+  width:100%;
+  height:400px;
+  position: relative;
+  border: 5px solid black;
+}
+
+#content_links > .dots{
+  width:1%;
+  display: inline-block;
+  border-left:5px dashed black;
+  height: 100%;
+}
+
+#content_links > .parts{
+  display: inline-block;
+  position: relative;
+  width:49%;
+  height: 100%;
+  /* background-color: grey; */
+}
+
+.parts > #phone_back > .phone{
+  height:78%;
+  width:88%;
+  margin: auto;
+  border:3px solid grey;
+  background-color: white;
+  position: relative;
+  /* left: 26%; */
+}
+
+.parts > #phone_back{
+  height:98%;
+  width:30%;
+  margin: auto;
+  border:3px solid grey;
+  background-color: black;
+  position: absolute;
+  left: 26%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+#links_titles > h2{
+  display: inline-block;
+}
+
+.title_text_right{
+  right : 10%;
+  position: absolute;
+}
+
+#links_container {
+  position: absolute;
+  padding : 20px;
+}
+
+#links_container > .draggable {
+  display: inline-block;
+  margin-right: 15px;
+  vertical-align: middle;
+}
+#links_container > .draggable > img{
+  width:40px;
+}
+
+#links_container > .ui-draggable-dragging{
+  background-color: rgba(200,200,200,0.5) !important;
+}
+
+#sortable{
+  list-style: circle;
+  padding: 5px !important;
+  overflow-y: scroll;
+  height: 90%;
+} 
+
+#sortable > li {
+  width: 87% !important;
+  display: block;
+}
+
+#sortable > .ui-draggable-dragging{
+  background-color: rgba(100,200,100,0.7) !important;
+}
+
+.phone_link_item{
+  padding: 10px;
+  display: block;
+  background-color: white !important;
+}
+
+#delete{
+  background-color: rgba(200,0,0,0.5);
+}
+
+#dialog > #notification{
+  padding: 10px;
+  border: none;
+  /* font-size: 14px; */
+  /* height: 29px; */
+}
+
+
+.user_row {
+  background-color: rgba(200,200,200,0.5);
+}
+
+.light_row {
+  background-color: rgba(100,100,100,0.5);
+}
+
+.user_row > td{
+  padding : 10px;
+}
