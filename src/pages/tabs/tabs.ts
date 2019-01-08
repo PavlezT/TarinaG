@@ -70,7 +70,7 @@ export class TabsPage {
       }
       // this.startShow();
       this.service.getApp.then(()=>{this.getSpashScreen()});
-      this.padding = this.device.model.toLowerCase().includes('iphone x');
+      this.padding = this.device.model.toLowerCase().includes('iphone x') || this.device.model.toLowerCase().includes('iphone10') || this.device.model.toLowerCase().includes('iphone 10');
     })
   } 
 

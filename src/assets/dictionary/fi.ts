@@ -33,7 +33,7 @@ export var fi = {
     "Name" : "Nimi",
     "Email" : "Sähköposti",
     "Message" : "Viesti",
-    "Send" : "Lähettää",
+    "Send" : "Lähetä",
     "Back" : "Takaisin",
     "FillFields" : "Täytä kaikki kentät",
     "EnterValidEmail" : "Anna voimassa oleva sähköposti",
